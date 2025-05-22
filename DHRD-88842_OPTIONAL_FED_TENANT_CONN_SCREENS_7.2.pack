@@ -1,0 +1,759 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<HEAD>
+<PACKAGE>DHRD-88842_OPTIONAL_FED_TENANT_CONN_SCREENS_7.2</PACKAGE>
+<NAME>DHRD-88842_OPTIONAL_FED_TENANT_CONN_SCREENS_7.2</NAME>
+<BUILD_DATE>20250423</BUILD_DATE>
+<LEVEL>OPTIONAL</LEVEL>
+<ORIGIN></ORIGIN>
+<RELEASE>7.2.0.0-SNAPSHOT</RELEASE>
+<CREATOR>NeoXam</CREATOR>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+</HEAD>
+
+<BODY>
+
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTUSER FIND="NAME='rcore'" USER="NeoXam" UPDATE_DATE="31/03/2025" UPDATE_TIME="11:37:21" LABEL='Core Repository'>
+<T_SMARTUSER CODEFIELDS="NAME" >
+</T_SMARTUSER>
+<T_SMARTUSER_AUTHENTIFICATION>
+</T_SMARTUSER_AUTHENTIFICATION>
+<T_SMARTUSER_AUTHORIZATION>
+</T_SMARTUSER_AUTHORIZATION>
+<T_SMARTUSER_CLASSIFICATION>
+</T_SMARTUSER_CLASSIFICATION>
+<T_SMARTUSER_CODE CODEFIELDS="USER_CODE_TYPE" >
+</T_SMARTUSER_CODE>
+<T_SMARTUSER_EMAIL>
+</T_SMARTUSER_EMAIL>
+<T_SMARTUSER_INHERITANCE CODEFIELDS="INHERITED_USER^INHERITED_CATEGORY" >
+</T_SMARTUSER_INHERITANCE>
+<T_SMARTUSER_LINK>
+</T_SMARTUSER_LINK>
+<T_SMARTUSER_MENU_NODE CODEFIELDS="M_NODE_CODE" >
+</T_SMARTUSER_MENU_NODE>
+<T_SMARTUSER_NAVCONFIG>
+</T_SMARTUSER_NAVCONFIG>
+<T_SMARTUSER_PERSONAL_INFO>
+</T_SMARTUSER_PERSONAL_INFO>
+<T_SMARTUSER_PREFERENCE>
+</T_SMARTUSER_PREFERENCE>
+<T_SMARTUSER_SHORTCUT>
+</T_SMARTUSER_SHORTCUT>
+<T_SMARTUSER_SYS_PREFERENCE CODEFIELDS="SYSPREF_NAME" >
+</T_SMARTUSER_SYS_PREFERENCE>
+<T_SMARTUSER_WINDOW CODEFIELDS="WINDOW_CODE" >
+<R_SMARTUSER_WINDOW CODE=",[&quot;WINDOW_CODE&quot;,&quot;_SCOPE_DEF2_D&quot;,]"  LOCAL_ID="159036" >
+<WINDOW_CODE ><![CDATA[_SCOPE_DEF2_D]]></WINDOW_CODE>
+<WINDOW_CONFIG ><![CDATA[$,["WINDOW_CODE","_SCOPE_DEF2_D",]^WINDOW_CONFIG]]></WINDOW_CONFIG>
+<WINDOW_HEIGHT >0</WINDOW_HEIGHT>
+<WINDOW_ICON >Form blue</WINDOW_ICON>
+<WINDOW_NAME ><![CDATA[Scope definition detail]]></WINDOW_NAME>
+<WINDOW_NAME_TRANSLATIONS ><![CDATA[0::Scope definition detail;;1::Scope definition detail;;2::;;3::;;4::;;5::]]></WINDOW_NAME_TRANSLATIONS>
+<WINDOW_NODE >,[&quot;M_NODE_CODE&quot;,&quot;rcore_...&quot;,]</WINDOW_NODE>
+<WINDOW_PRIVACY_LEVEL >SMARTCO</WINDOW_PRIVACY_LEVEL>
+<WINDOW_REF ></WINDOW_REF>
+<WINDOW_SCOPEVIEW ></WINDOW_SCOPEVIEW>
+<WINDOW_TYPE ><![CDATA[Detail]]></WINDOW_TYPE>
+<WINDOW_WIDTH >0</WINDOW_WIDTH>
+<WINDOW_X >0</WINDOW_X>
+<WINDOW_Y >0</WINDOW_Y>
+</R_SMARTUSER_WINDOW>
+</T_SMARTUSER_WINDOW>
+
+<RF CLASS="DetailConfig" CODE="$,[&quot;WINDOW_CODE&quot;,&quot;_SCOPE_DEF2_D&quot;,]^WINDOW_CONFIG" VERSION=0>
+<BANNERCOLOR>-14526837</BANNERCOLOR>
+<BANNERTEXTCOLOR>-1</BANNERTEXTCOLOR>
+<bannertext><![CDATA[Scope definition detail]]></bannertext>
+<RF CLASS="componenttree">
+<name>Form</name>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Global</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Global</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>1</java.lang.Long>
+<java.lang.String>Global</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Name</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Name</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>S_CODE</fieldname>
+<userlabel><![CDATA[Code]]></userlabel>
+<userComment><![CDATA[Code]]></userComment>
+<DISPLAYMODEREFERENCE>-1</DISPLAYMODEREFERENCE>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Code</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Code</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>SN_NAME</fieldname>
+<userlabel><![CDATA[Name (En.)]]></userlabel>
+<userComment><![CDATA[name]]></userComment>
+<DISPLAYMODEREFERENCE>-1</DISPLAYMODEREFERENCE>
+<RF CLASS="recspec">
+<fd><![CDATA[SN_NAME]]></fd>
+<RF CLASS="thisrespec">
+<RF CLASS="lib.system.objects.Condition$RecSpec$Element">
+<fieldname>SN_LANGUAGE</fieldname>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[0]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Name (En.)</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>1</java.lang.Integer>
+<java.lang.String>Name (En.)</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>name</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>SN_NAME</fieldname>
+<userlabel><![CDATA[Name (Fr.)]]></userlabel>
+<userComment><![CDATA[name]]></userComment>
+<DISPLAYMODEREFERENCE>-1</DISPLAYMODEREFERENCE>
+<RF CLASS="recspec">
+<fd><![CDATA[SN_NAME]]></fd>
+<RF CLASS="thisrespec">
+<RF CLASS="lib.system.objects.Condition$RecSpec$Element">
+<fieldname>SN_LANGUAGE</fieldname>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[1]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Name (Fr.)</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>1</java.lang.Integer>
+<java.lang.String>Name (Fr.)</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>name</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>S_ENABLED</fieldname>
+<userlabel><![CDATA[Enabled?]]></userlabel>
+<userComment><![CDATA[Enabled]]></userComment>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Enabled?</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Enabled</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Characteristics</name>
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Characteristics</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>1</java.lang.Long>
+<java.lang.String>Characteristics</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="desc">
+<fieldname>S_TYPE</fieldname>
+<userlabel><![CDATA[Type]]></userlabel>
+<userComment><![CDATA[Type]]></userComment>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Type</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Type</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>S_CATEGORY</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Description</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Description</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>S_DESC</fieldname>
+<userlabel><![CDATA[ ]]></userlabel>
+<userComment><![CDATA[Description]]></userComment>
+<DISPLAYMODEREFERENCE>-1</DISPLAYMODEREFERENCE>
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Description</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Remote Scope API</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Remote Scope API</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Communication</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Communication</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>S_REMOTE_SCOPE</fieldname>
+<userlabel><![CDATA[Remote Scope]]></userlabel>
+<userComment><![CDATA[Remote Scope]]></userComment>
+<DISPLAYMODEREFERENCE>2</DISPLAYMODEREFERENCE>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Remote Scope</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Remote Scope</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Tenants</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Tenants</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GridNode">
+<basetable>SCOPE_DEF_TENANT</basetable>
+<RF CLASS="selectedfields">
+<RF CLASS="gridconfig">
+<RF CLASS="columns">
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<WIDTH>-1</WIDTH>
+<DISPLAY>1</DISPLAY>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+</RF>
+<RF CLASS="sortindex">
+</RF>
+<RF CLASS="sortasc">
+</RF>
+<RF CLASS="cc">
+</RF>
+</RF>
+<RF CLASS="list">
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>ST_TENANT_NAME</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="cond">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>SCOPE_DEF</tablename>
+<classlabel>MxScopeDef</classlabel>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>SCOPE_DEF</tablename>
+<classlabel>MxScopeDef</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>S_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[S_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[SCOPE_REST_API]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Condition</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Condition</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>1</java.lang.Long>
+<java.lang.String>Condition</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$CustomNode">
+<name>lib.clientui.custom.ConditionPane</name>
+<paramstr><![CDATA[SC_CONDITION]]></paramstr>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$CustomNode">
+<name>lib.clientui.custom.ConditionFieldsPane</name>
+<paramstr><![CDATA[SC_CONDITION;SC_CONDITION_FIELDS;SCOPE]]></paramstr>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>SCOPE_DEF</tablename>
+<classlabel>MxScopeDef</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>S_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[S_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[CONDITION]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Script</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Script</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>1</java.lang.Long>
+<java.lang.String>Script</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>SC_SCRIPT_FIELDS</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<fieldconfig>,0,</fieldconfig>
+<RF CLASS="desc">
+<fieldname>SC_SCRIPT</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>SCOPE_DEF</tablename>
+<classlabel>MxScopeDef</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>S_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[S_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[SCRIPT]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>DataSet</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>DataSet</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>1</java.lang.Long>
+<java.lang.String>DataSet</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$CustomNode">
+<name>lib.clientui.custom.DataSetCustomPane</name>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>SCOPE_DEF</tablename>
+<classlabel>MxScopeDef</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>S_TYPE</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[S_TYPE]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="sortingfield">
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+<RF CLASS="bannerfield">
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>SCOPE_DEF</tablename>
+<classlabel>MxScopeDef</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTUSER>
+</RESULT>
+
+<!-- -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTUSER FIND="NAME='rfederatedtenant'" USER="NeoXam" UPDATE_DATE="31/03/2025" UPDATE_TIME="11:30:00" LABEL='Federated Tenant Repository'>
+<T_SMARTUSER CODEFIELDS="NAME" >
+<R_SMARTUSER CODE=",[&quot;NAME&quot;,&quot;rfederatedtenant&quot;,]"  LOCAL_ID="90995" >
+<ACTIVE >N</ACTIVE>
+<BACKGROUND_IMAGE ></BACKGROUND_IMAGE>
+<BACKUP_USER ></BACKUP_USER>
+<BUSINESS_ENTITY ></BUSINESS_ENTITY>
+<BUSINESS_TITLE ></BUSINESS_TITLE>
+<BUSINESS_UNIT ></BUSINESS_UNIT>
+<CAN_CREATE_FOLDERS >Y</CAN_CREATE_FOLDERS>
+<CAN_CREATE_WINDOWS >Y</CAN_CREATE_WINDOWS>
+<CAN_EDIT_ALL_WINDOWS >Y</CAN_EDIT_ALL_WINDOWS>
+<CAN_EDIT_MENU_ORDERING >Y</CAN_EDIT_MENU_ORDERING>
+<CAN_EDIT_WIN_CONFIG ></CAN_EDIT_WIN_CONFIG>
+<CAN_OPEN_INSPECTOR >FULL_ACCESS</CAN_OPEN_INSPECTOR>
+<COMPANY ></COMPANY>
+<COUNTRY ></COUNTRY>
+<DATAVENDOR_ACCOUNT ></DATAVENDOR_ACCOUNT>
+<EMAIL_ADDRESS ></EMAIL_ADDRESS>
+<EXTRA_MENU_FLAG >Y</EXTRA_MENU_FLAG>
+<FIRSTNAME ></FIRSTNAME>
+<FIT_USER_MODEL >NOMODEL</FIT_USER_MODEL>
+<FULLNAME ><![CDATA[Federated Tenant Repository]]></FULLNAME>
+<HOME_PAGE_CODE ></HOME_PAGE_CODE>
+<IS_USER_MODEL ></IS_USER_MODEL>
+<LANGUAGE >0</LANGUAGE>
+<LANGUAGE_DATE >1</LANGUAGE_DATE>
+<LANGUAGE_GUI ></LANGUAGE_GUI>
+<LANGUAGE_NUMBER ></LANGUAGE_NUMBER>
+<LASTNAME ><![CDATA[Federated Tenant Repository]]></LASTNAME>
+<LDAP_USER_LOGIN ></LDAP_USER_LOGIN>
+<LICENSE_AGREEMENT ></LICENSE_AGREEMENT>
+<LICENSE_AGREEMENT_DATE ></LICENSE_AGREEMENT_DATE>
+<LINKED_FEED ></LINKED_FEED>
+<LOCATION ></LOCATION>
+<LOGGED_FLAG ></LOGGED_FLAG>
+<MAIN_HEIGHT >800</MAIN_HEIGHT>
+<MAIN_WIDTH >1280</MAIN_WIDTH>
+<MAIN_X >0</MAIN_X>
+<MAIN_Y >0</MAIN_Y>
+<MANAGER ></MANAGER>
+<MAX_CONNECTIONS ></MAX_CONNECTIONS>
+<MENU_ORDERING ><![CDATA[,N721,N723,W10362,W2438,W2419,W2444,N1314,W10359,W10360,N1316,W2421,W10365,W2447,W2431,W2430,W2417,W2425,W2414]]></MENU_ORDERING>
+<MONITOR_CONSUMPTION ></MONITOR_CONSUMPTION>
+<NAME ><![CDATA[rfederatedtenant]]></NAME>
+<PASSWORD ></PASSWORD>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<ROLE_TYPE >WINDOWS</ROLE_TYPE>
+<SMARTCODE ><![CDATA[FT Repository]]></SMARTCODE>
+<TIMEZONE ></TIMEZONE>
+<USER_CALENDAR ></USER_CALENDAR>
+<USER_CATEGORY >REPOSITORY</USER_CATEGORY>
+<USER_MODEL ></USER_MODEL>
+<VACATION_FLAG ></VACATION_FLAG>
+</R_SMARTUSER>
+</T_SMARTUSER>
+<T_SMARTUSER_AUTHENTIFICATION>
+</T_SMARTUSER_AUTHENTIFICATION>
+<T_SMARTUSER_AUTHORIZATION>
+</T_SMARTUSER_AUTHORIZATION>
+<T_SMARTUSER_CLASSIFICATION>
+</T_SMARTUSER_CLASSIFICATION>
+<T_SMARTUSER_CODE CODEFIELDS="USER_CODE_TYPE" >
+<R_SMARTUSER_CODE CODE=",[&quot;USER_CODE_TYPE&quot;,&quot;ALIAS&quot;,]"  LOCAL_ID="84659" >
+<USER_CODE ><![CDATA[-]]></USER_CODE>
+<USER_CODE_TYPE >ALIAS</USER_CODE_TYPE>
+</R_SMARTUSER_CODE>
+<R_SMARTUSER_CODE CODE=",[&quot;USER_CODE_TYPE&quot;,&quot;FULLNAME&quot;,]"  LOCAL_ID="84658" >
+<USER_CODE ><![CDATA[-]]></USER_CODE>
+<USER_CODE_TYPE >FULLNAME</USER_CODE_TYPE>
+</R_SMARTUSER_CODE>
+<R_SMARTUSER_CODE CODE=",[&quot;USER_CODE_TYPE&quot;,&quot;INITIALS&quot;,]"  LOCAL_ID="84660" >
+<USER_CODE ><![CDATA[-]]></USER_CODE>
+<USER_CODE_TYPE >INITIALS</USER_CODE_TYPE>
+</R_SMARTUSER_CODE>
+<R_SMARTUSER_CODE CODE=",[&quot;USER_CODE_TYPE&quot;,&quot;IP&quot;,]"  LOCAL_ID="84657" >
+<USER_CODE ><![CDATA[-]]></USER_CODE>
+<USER_CODE_TYPE >IP</USER_CODE_TYPE>
+</R_SMARTUSER_CODE>
+</T_SMARTUSER_CODE>
+<T_SMARTUSER_EMAIL>
+</T_SMARTUSER_EMAIL>
+<T_SMARTUSER_INHERITANCE>
+</T_SMARTUSER_INHERITANCE>
+<T_SMARTUSER_LINK>
+</T_SMARTUSER_LINK>
+<T_SMARTUSER_MENU_NODE CODEFIELDS="M_NODE_CODE" >
+<R_SMARTUSER_MENU_NODE CODE=",[&quot;M_NODE_CODE&quot;,&quot;FT Repository_...&quot;,]"  LOCAL_ID="87348" >
+<M_FATHER_NODE_ID >,[&quot;M_NODE_CODE&quot;,&quot;FT Repository_Federated Tenant&quot;,]</M_FATHER_NODE_ID>
+<M_IS_WORKSPACE ></M_IS_WORKSPACE>
+<M_NODE_CODE ><![CDATA[FT Repository_...]]></M_NODE_CODE>
+<M_NODE_LEVEL >0</M_NODE_LEVEL>
+<M_NODE_NAME ><![CDATA[...]]></M_NODE_NAME>
+<M_NODE_NAME_TRANSLATIONS ></M_NODE_NAME_TRANSLATIONS>
+<M_NODE_TYPE >STANDARD</M_NODE_TYPE>
+</R_SMARTUSER_MENU_NODE>
+<R_SMARTUSER_MENU_NODE CODE=",[&quot;M_NODE_CODE&quot;,&quot;FT Repository_Federated Tenant&quot;,]"  LOCAL_ID="87347" >
+<M_FATHER_NODE_ID >,[&quot;M_NODE_CODE&quot;,&quot;rsystem_System admin&quot;,]</M_FATHER_NODE_ID>
+<M_IS_WORKSPACE ></M_IS_WORKSPACE>
+<M_NODE_CODE ><![CDATA[FT Repository_Federated Tenant]]></M_NODE_CODE>
+<M_NODE_LEVEL >0</M_NODE_LEVEL>
+<M_NODE_NAME ><![CDATA[Federated Tenant]]></M_NODE_NAME>
+<M_NODE_NAME_TRANSLATIONS ></M_NODE_NAME_TRANSLATIONS>
+<M_NODE_TYPE >STANDARD</M_NODE_TYPE>
+</R_SMARTUSER_MENU_NODE>
+</T_SMARTUSER_MENU_NODE>
+<T_SMARTUSER_NAVCONFIG>
+</T_SMARTUSER_NAVCONFIG>
+<T_SMARTUSER_PERSONAL_INFO>
+</T_SMARTUSER_PERSONAL_INFO>
+<T_SMARTUSER_PREFERENCE>
+</T_SMARTUSER_PREFERENCE>
+<T_SMARTUSER_SHORTCUT>
+</T_SMARTUSER_SHORTCUT>
+<T_SMARTUSER_SYS_PREFERENCE CODEFIELDS="SYSPREF_NAME" >
+<R_SMARTUSER_SYS_PREFERENCE CODE=",[&quot;SYSPREF_NAME&quot;,&quot;gui.main.mainsplit.pos&quot;,]"  LOCAL_ID="101057" >
+<SYSPREF_NAME ><![CDATA[gui.main.mainsplit.pos]]></SYSPREF_NAME>
+<SYSPREF_VALUE ><![CDATA[156]]></SYSPREF_VALUE>
+</R_SMARTUSER_SYS_PREFERENCE>
+</T_SMARTUSER_SYS_PREFERENCE>
+<T_SMARTUSER_WINDOW CODEFIELDS="WINDOW_CODE" >
+<R_SMARTUSER_WINDOW CODE=",[&quot;WINDOW_CODE&quot;,&quot;_FEDERATEDCLIENT_Q&quot;,]"  LOCAL_ID="169050" >
+<WINDOW_CODE ><![CDATA[_FEDERATEDCLIENT_Q]]></WINDOW_CODE>
+<WINDOW_CONFIG ><![CDATA[$,["WINDOW_CODE","_FEDERATEDCLIENT_Q",]^WINDOW_CONFIG]]></WINDOW_CONFIG>
+<WINDOW_HEIGHT >430</WINDOW_HEIGHT>
+<WINDOW_ICON >Target</WINDOW_ICON>
+<WINDOW_NAME ><![CDATA[Clients]]></WINDOW_NAME>
+<WINDOW_NAME_TRANSLATIONS ><![CDATA[0::Clients;;1::Clients;;2::;;3::;;4::;;5::;;6::]]></WINDOW_NAME_TRANSLATIONS>
+<WINDOW_NODE >,[&quot;M_NODE_CODE&quot;,&quot;FT Repository_Federated Tenant&quot;,]</WINDOW_NODE>
+<WINDOW_PRIVACY_LEVEL >SMARTCO</WINDOW_PRIVACY_LEVEL>
+<WINDOW_REF ></WINDOW_REF>
+<WINDOW_SCOPEVIEW ></WINDOW_SCOPEVIEW>
+<WINDOW_TYPE ><![CDATA[Query]]></WINDOW_TYPE>
+<WINDOW_WIDTH >600</WINDOW_WIDTH>
+<WINDOW_X >20</WINDOW_X>
+<WINDOW_Y >20</WINDOW_Y>
+</R_SMARTUSER_WINDOW>
+</T_SMARTUSER_WINDOW>
+
+<RF CLASS="QueryConfig" CODE="$,[&quot;WINDOW_CODE&quot;,&quot;_FEDERATEDCLIENT_Q&quot;,]^WINDOW_CONFIG" VERSION=0>
+<AUTOMATICQUERY>1</AUTOMATICQUERY>
+<DETAILSPLITPOSITION>645</DETAILSPLITPOSITION>
+<BANNERCOLOR>-14526837</BANNERCOLOR>
+<BANNERTEXTCOLOR>-1</BANNERTEXTCOLOR>
+<LOADFULLOBJECTS>1</LOADFULLOBJECTS>
+<RF CLASS="bannerfield">
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+<RF CLASS="selectedfields">
+<RF CLASS="gridconfig">
+<TREELNF>0</TREELNF>
+<RF CLASS="columns">
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<WIDTH>200</WIDTH>
+<DISPLAY>1</DISPLAY>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>1</INDEX>
+<WIDTH>200</WIDTH>
+<DISPLAY>1</DISPLAY>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+</RF>
+<RF CLASS="sortindex">
+</RF>
+<RF CLASS="sortasc">
+</RF>
+<RF CLASS="cc">
+</RF>
+</RF>
+<RF CLASS="list">
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>NAME</fieldname>
+<RF CLASS="recspec">
+<fd><![CDATA[NAME]]></fd>
+<RF CLASS="thisrespec">
+<RF CLASS="lib.system.objects.Condition$RecSpec$Element">
+<fieldname>NAME_LANGUAGE</fieldname>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[0]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>CLIENT_CHANNEL</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>FEDERATEDCLIENT</tablename>
+<classlabel>MxFederatedClient</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTUSER>
+</RESULT>
+
+</BODY>
