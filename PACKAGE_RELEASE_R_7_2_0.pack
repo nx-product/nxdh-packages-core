@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding="UTF-8" ?>
 <HEAD>
-<PACKAGE>R_7_2_0 (1030)</PACKAGE>
-<NAME>R_7_2_0 (1030)</NAME>
-<CONTENT_HASH>91021ee422fdb2706d4353b57b3b6292c9d72fc85925437cf1f28af3a1af2fb9</CONTENT_HASH>
+<PACKAGE>R_7_2_0_0 (1030)</PACKAGE>
+<NAME>R_7_2_0_0 (1030)</NAME>
+<CONTENT_HASH>4862edab23379cbd456cfbaa626e72bc6daeca73e35d4aa8209ec72d4725a75d</CONTENT_HASH>
 <BUILD_DATE>20250522</BUILD_DATE>
 <LEVEL>OPTIONAL</LEVEL>
-<RELEASE>7.3.0.0-SNAPSHOT</RELEASE>
-<CREATOR>BAMS\lf.guimaraes</CREATOR>
+<RELEASE>7.2.0.0</RELEASE>
+<CREATOR>jerome.segard</CREATOR>
 </HEAD>
 
 <BODY>
-<!--   Package created by Luiz Fernando Dos Reis Guimaraes -->
-<!--      creation date: 22/05/2025 10:34:56 -->
+<!--   Package created by Jerome Segard -->
+<!--      creation date: 22/05/2025 11:58:25 -->
 <!--      creation version: null -->
-<!--      source environment: //10.53.174.163:8309/SmartServer -->
+<!--      source environment: //nxdh-docker-release-mngt-qa:8100/SmartServer -->
 
-<!--MxPackageRelease 1030 v5 -->
+<!--MxPackageRelease 1030 v6 -->
 <RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
-<PACKAGE_RELEASE FIND="CODE='R_7_2_0'" USER="laurent.guihard" UPDATE_DATE="21/05/2025" UPDATE_TIME="18:59:13" OVERWRITE='1' LABEL='R_7_2_0'>
+<PACKAGE_RELEASE FIND="CODE='R_7_2_0'" USER="BAMS\lf.guimaraes" UPDATE_DATE="22/05/2025" UPDATE_TIME="10:34:59" OVERWRITE='1' LABEL='R_7_2_0_0'>
 <T_PACKAGE_RELEASE CODEFIELDS="CODE" >
 <R_PACKAGE_RELEASE CODE=",[&quot;CODE&quot;,&quot;R_7_2_0&quot;,]"  LOCAL_ID="1030" >
 <CLOSED ></CLOSED>
@@ -49,7 +49,7 @@
 <T_PACKAGE_RELEASE_NAME CODEFIELDS="LANGUAGE" >
 <R_PACKAGE_RELEASE_NAME CODE=",[&quot;LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="1049" >
 <LANGUAGE >0</LANGUAGE>
-<NAME ><![CDATA[R_7_2_0]]></NAME>
+<NAME ><![CDATA[R_7_2_0_0]]></NAME>
 </R_PACKAGE_RELEASE_NAME>
 <R_PACKAGE_RELEASE_NAME CODE=",[&quot;LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="1050" >
 <LANGUAGE >1</LANGUAGE>
