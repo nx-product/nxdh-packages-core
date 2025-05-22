@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<HEAD>
+<PACKAGE>EXPORT_OBJECT-03/02/2025_15:35:57</PACKAGE>
+<NAME>Export object-03/02/2025 15:35:57</NAME>
+<BUILD_DATE>20250203</BUILD_DATE>
+<LEVEL>OPTIONAL</LEVEL>
+<ORIGIN></ORIGIN>
+<RELEASE>7.2.0.0-SNAPSHOT</RELEASE>
+<CREATOR>loic.brossard</CREATOR>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+</HEAD>
+
+<BODY>
+<!--   Package created by Loic Brossard -->
+<!--      creation date: 03/02/2025 15:36:02 -->
+<!--      creation version: null -->
+<!--      source environment: //nxdh-visage-qa-72:8100/SmartServer -->
+
+<!--MxParam 83885 v2 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<PARAM FIND="PARAM_COD='clientui.web.grid.max_nodes'" USER="loic.brossard" UPDATE_DATE="03/02/2025" UPDATE_TIME="15:35:23" LABEL='clientui.web.grid.max_nodes'>
+<T_PARAM CODEFIELDS="PARAM_COD" >
+<R_PARAM CODE=",[&quot;PARAM_COD&quot;,&quot;clientui.web.grid.max_nodes&quot;,]"  LOCAL_ID="83885" >
+<PARAM_ACTIVE >Y</PARAM_ACTIVE>
+<PARAM_CATEGORY >PACKAGING</PARAM_CATEGORY>
+<PARAM_COD ><![CDATA[clientui.web.grid.max_nodes]]></PARAM_COD>
+<PARAM_DESCRIPTION ><![CDATA[Max number of nodes allowed on grids. If more nodes have to be displayed, a message prompts the user to display the grid flat or keep the breaks, at the risk of impacting performance.]]></PARAM_DESCRIPTION>
+<PARAM_IS_RESTART_MANDATORY >N</PARAM_IS_RESTART_MANDATORY>
+<PARAM_PRIVACY >NEOXAMINTERNAL</PARAM_PRIVACY>
+<PARAM_VALUE ><![CDATA[50000]]></PARAM_VALUE>
+<PARAM_VALUE_LIST ></PARAM_VALUE_LIST>
+<PARAM_VALUE_MAX ></PARAM_VALUE_MAX>
+<PARAM_VALUE_MIN ></PARAM_VALUE_MIN>
+<PARAM_VALUE_TYPE >INTEGER</PARAM_VALUE_TYPE>
+</R_PARAM>
+</T_PARAM>
+<T_PARAM_ENUM>
+</T_PARAM_ENUM>
+<T_PARAM_USER>
+</T_PARAM_USER>
+
+</PARAM>
+</RESULT>
+
+</BODY>

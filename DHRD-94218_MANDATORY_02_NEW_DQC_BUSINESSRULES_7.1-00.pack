@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding="windows-1252" ?>
+<HEAD>
+<PACKAGE>DHRD-94218_MANDATORY_02_NEW_DQC_BUSINESSRULES_7.1-00</PACKAGE>
+<NAME>DHRD-94218_MANDATORY_02_NEW_DQC_BUSINESSRULES_7.1-00</NAME>
+<BUILD_DATE>20241127</BUILD_DATE>
+<LEVEL>MANDATORY</LEVEL>
+<ORIGIN></ORIGIN>
+<RELEASE>7.1.0.0</RELEASE>
+<CREATOR>robert.fleiser</CREATOR>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+</HEAD>
+
+<BODY>
+<!--   Package created by Robert Fleiser -->
+<!--      creation date: 27/11/2024 12:16:11 -->
+<!--      creation version: null -->
+<!--      source environment: //vm-nxdh-dqc:8100/SmartServer -->
+
+<!--MxRule 154214 v6 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='RESET_CONTROL_LIST'" USER="robert.fleiser" UPDATE_DATE="27/11/2024" UPDATE_TIME="19:37:52" LABEL='Reset Control List' PARTIAL='1'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;RESET_CONTROL_LIST&quot;,]"  LOCAL_ID="166220" >
+<IMPACT ><![CDATA[//Reset the list of control linked to the execution rule
+if (obj.first("CONTROLEXECRULE_CONTROL")){
+   do {
+      obj.remove("CONTROLEXECRULE_CONTROL");
+   } while (obj.next("CONTROLEXECRULE_CONTROL"))
+}
+technicalClass := '';
+if (obj.BUSINESS_CLASS != ""){
+   businessClass := getObject("MxBusinessClass", obj.BUSINESS_CLASS);
+   technicalClass := getObject("MxClassDef", businessClass.TECH_CLASS);
+} else if (obj.TECHNICAL_CLASS != ""){
+   technicalClass := getObject("MxClassDef", obj.TECHNICAL_CLASS);
+}
+if (technicalClass != '') {
+   table := technicalClass.TABLE_NAME[REC_TYPE=0];
+   condition := ',[[["'+table+'",0,"",?,0,0,]][]]';
+   obj.CONDITION := condition;
+}
+//saveObjects(obj);]]></IMPACT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+</SMARTRULE>
+</RESULT>
+
+</BODY>

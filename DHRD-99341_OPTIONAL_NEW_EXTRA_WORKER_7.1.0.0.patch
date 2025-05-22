@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<HEAD>
+<PACKAGE>DHRD_99341_OPTIONAL_NEW_EXTRA_WORKER_7.1.0.0</PACKAGE>
+<NAME>DHRD-99341_OPTIONAL_NEW_EXTRA_WORKER_7.1.0.0</NAME>
+<BUILD_DATE>20241209</BUILD_DATE>
+<LEVEL>OPTIONAL</LEVEL>
+<ORIGIN></ORIGIN>
+<RELEASE>7.1.0.0-SNAPSHOT</RELEASE>
+<CREATOR>BAMS\makhan.fayinke</CREATOR>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+</HEAD>
+
+<BODY>
+<!--   Package created by Makhan Fayinke -->
+<!--      creation date: 12/09/2024 16:11:07 -->
+<!--      creation version: null -->
+<!--      source environment: //localhost:8049/SmartServer -->
+
+<!--MxParam 382 v1 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<PARAM FIND="PARAM_COD='system.multiprocess.extra_worker_Launch_args'" USER="BAMS\makhan.fayinke" UPDATE_DATE="06/12/2024" UPDATE_TIME="16:54:09" LABEL='system.multiprocess.extra_worker_Launch_args'>
+<T_PARAM CODEFIELDS="PARAM_COD" >
+<R_PARAM CODE=",[&quot;PARAM_COD&quot;,&quot;system.multiprocess.extra_worker_Launch_args&quot;,]"  LOCAL_ID="3827" >
+<PARAM_ACTIVE >Y</PARAM_ACTIVE>
+<PARAM_CATEGORY >SYSTEM</PARAM_CATEGORY>
+<PARAM_COD ><![CDATA[system.multiprocess.extra_worker_Launch_args]]></PARAM_COD>
+<PARAM_DESCRIPTION ><![CDATA[system.multiprocess.extra_worker_Launch_args]]></PARAM_DESCRIPTION>
+<PARAM_IS_RESTART_MANDATORY >Y</PARAM_IS_RESTART_MANDATORY>
+<PARAM_PRIVACY >DATAADMIN</PARAM_PRIVACY>
+<PARAM_VALUE ><![CDATA[-NTWKERRORLOCK]]></PARAM_VALUE>
+<PARAM_VALUE_TYPE >TEXT</PARAM_VALUE_TYPE>
+</R_PARAM>
+</T_PARAM>
+<T_PARAM_USER>
+</T_PARAM_USER>
+
+</PARAM>
+</RESULT>
+
+</BODY>
