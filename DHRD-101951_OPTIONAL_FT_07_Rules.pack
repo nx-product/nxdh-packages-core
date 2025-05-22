@@ -1,0 +1,3389 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<HEAD>
+<PACKAGE>DHRD-101951_OPTIONAL_FT_07_Rules</PACKAGE>
+<NAME>DHRD-101951_OPTIONAL_FT_07_Rules</NAME>
+<BUILD_DATE>20250411</BUILD_DATE>
+<LEVEL>OPTIONAL</LEVEL>
+<RELEASE>7.3.0.0-SNAPSHOT</RELEASE>
+<CREATOR>NeoXam</CREATOR>
+</HEAD>
+
+<BODY>
+
+<!--MxRule 167753 v16 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_CS_ACTIVATE_ALL_COMP'" USER="NeoXam" UPDATE_DATE="01/04/2025" UPDATE_TIME="16:20:59" LABEL='Activate All Components'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_CS_ACTIVATE_ALL_COMP&quot;,]"  LOCAL_ID="167753" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_CS_ACTIVATE_ALL_COMP",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, triggered by a user action, will activate all Components present in the Client Service.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//loop on the components of the service
+pos := obj.first("BUSINESSSERVICE_COMPONENT");
+while(pos>0){
+  obj.BS_COMPONENT_STATUS := "ACTIVE";
+  pos := obj.next("BUSINESSSERVICE_COMPONENT");
+  }
+
+saveObjectsImmediately(obj);
+return;]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_CS_ACTIVATE_ALL_COMP]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170354" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Activate All Components]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170355" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Activer tous les composants]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172542" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_CS_ACTIVATE_ALL_COMP&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167724 v61 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_ACTIV_DEACTIV_COMP_CLIENT'" USER="NeoXam" UPDATE_DATE="17/03/2025" UPDATE_TIME="10:30:44" LABEL='Activate/Deactivate a Component'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_ACTIV_DEACTIV_COMP_CLIENT&quot;,]"  LOCAL_ID="167724" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_ACTIV_DEACTIV_COMP_CLIENT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule will activate/deactivate the selected component in the Client Service.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+client_id := obj.BUSINESSSERVICE_CLIENT;
+active_id := getListItemId("FT_SERVICE_STATUS", "ACTIVE");
+inactive_id := getListItemId("FT_SERVICE_STATUS", "INACTIVE");
+component_list := array();
+
+//get the list of components present in the Client Service
+req := "select BSC.BS_COMPONENT_REFERENCE, CD.COMPONENTDEF_CODE from BUSINESSSERVICE_COMPONENT BSC, COMPONENTDEF CD where BSC.BUSINESSSERVICE_ID ="+obj.id()+" and BSC.BS_COMPONENT_REFERENCE = CD.COMPONENTDEF_ID order by CD.COMPONENTDEF_CODE";
+res := getSQLData(req);
+
+if (arraysize(res)=0){
+  return;
+}
+
+//build the list of Component codes for the pop-up
+if (arraysize(res)>0){
+  for (i:=0; i < arraysize(res); i:= i+1)
+  {
+    res_item := res[i]
+    component_id := res_item[0];
+    component_code := res_item[1];
+    component_list := arrayappend(component_list, component_code);
+    }
+}
+  
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Please pick a Component:";
+MsgDialog[1] := "ARRAY,Component:";
+MsgDialog[2] := component_list;
+
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+    userinfo("No Component was selected.");
+    return;
+    }
+  }
+
+component_code := param[0];
+component := getObjectByCode("COMPONENTDEF", component_code);
+component_id := component.id();
+
+//change the status at Client Service level.
+found_comp := obj.findRecord("BS_COMPONENT_REFERENCE", component_id);
+if (found_comp = 1){
+  if (obj.BS_COMPONENT_STATUS = active_id){
+    obj.BS_COMPONENT_STATUS := inactive_id;
+    saveObjectsImmediately(obj);
+    userinfo("The component with code "+component_code+" is now inactivated.");
+    return;
+    }
+  if (obj.BS_COMPONENT_STATUS = inactive_id){
+    obj.BS_COMPONENT_STATUS := active_id;
+    saveObjectsImmediately(obj);
+    userinfo("The component with code "+component_code+" is now activated.");
+    return;
+    }
+  }
+  else{
+    userinfo("The component with code "+component_code+" could not be found at client service level.");
+    return;
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_ACTIV_DEACTIV_COMP_CLIENT]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170297" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Activate/Deactivate a Component]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170298" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Activer/Désactiver le composant]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172514" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_ACTIV_DEACTIV_COMP_CLIENT&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167769 v28 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_ADD_COMP_SERVICE_LVL'" USER="NeoXam" UPDATE_DATE="19/03/2025" UPDATE_TIME="11:55:49" LABEL='Add Component'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_ADD_COMP_SERVICE_LVL&quot;,]"  LOCAL_ID="167769" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_ADD_COMP_SERVICE_LVL",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule allows the user to add a component to a service, from the service itself.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//build the list of Component Codes, that are not assigned
+component_list := array();
+unassigned_id := getListItemId("FT_COMPONENT_STATUS", "NOT_ASSIGNED");
+req := "select COMPONENTDEF_CODE from COMPONENTDEF where COMPONENTDEF_STATUS="+unassigned_id+" order by COMPONENTDEF_CODE";
+res := getSQLData(req);
+
+if (arraysize(res)=0){
+  userinfo("No unassigned components found.");
+  return;
+}
+
+if (arraysize(res)>0){
+  for (i:=0; i < arraysize(res); i:= i+1)
+  {
+    res_item := res[i]
+    component_code := res_item[0];
+    component_list := arrayappend(component_list, component_code);
+    }
+  }
+
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Please pick a Component:";
+MsgDialog[1] := "ARRAY,Component:";
+MsgDialog[2] := component_list;
+
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+     userinfo("No Component was selected.");
+     return;
+  }
+}
+
+//get the Component
+component_code := param[0];
+component := getObjectByCode("COMPONENTDEF", component_code);
+component_id := component.id();
+
+//check if the component is not already part of a service (it should never be the case, since we picked a component with 'unassigned' status)
+req := "select BS.BUSINESSSERVICE_ID, BS.BUSINESSSERVICE_CODE from BUSINESSSERVICE BS, BUSINESSSERVICE_COMPONENT BSC where BS.BUSINESSSERVICE_ID = BSC.BUSINESSSERVICE_ID and BS.BUSINESSSERVICE_CLIENT is NULL and BSC.BS_COMPONENT_REFERENCE ="+component_id;
+res := getSQLData(req);
+if (arraysize(res)>0){ //arraysize is either 0 or 1
+    res_item := res[0];
+    bs_code := res_item[1];
+    userinfo("This component is already part of the Business Service "+bs_code);
+    return;
+    }
+
+
+//add the component to the Business Service
+obj.create("BUSINESSSERVICE_COMPONENT");
+obj.BS_COMPONENT_REFERENCE := component_id;
+component.COMPONENTDEF_STATUS := "ASSIGNED";
+saveObjectsImmediately(obj, component);
+putInCache("COMP_BS_"+component_id, obj.id(), "ALWAYS");
+userinfo("Component added.");
+return;]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_ADD_COMP_SERVICE_LVL]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170385" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Add Component]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170386" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Ajouter le composant]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172558" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_ADD_COMP_SERVICE_LVL&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167712 v44 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_ADD_COMP_SERVICE'" USER="NeoXam" UPDATE_DATE="17/03/2025" UPDATE_TIME="10:30:44" LABEL='Add Component to Service'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_ADD_COMP_SERVICE&quot;,]"  LOCAL_ID="167712" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_ADD_COMP_SERVICE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule allows the user to add a component to a service, from the component list.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Please pick a Business Service:";
+MsgDialog[1] := "REFERENCE/BUSINESSSERVICE/BUSINESS_SERVICE,Business Service:";
+
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+     userinfo("No Business Service was selected.");
+     return;
+  }
+}
+
+//get Business Service
+businessService_id := param[0];
+businessService := getObject("MxBusinessService", businessService_id);
+
+//check if the component is not already part of a service
+req := "select BS.BUSINESSSERVICE_ID, BS.BUSINESSSERVICE_CODE from BUSINESSSERVICE BS, BUSINESSSERVICE_COMPONENT BSC where BS.BUSINESSSERVICE_ID = BSC.BUSINESSSERVICE_ID and BS.BUSINESSSERVICE_CLIENT is NULL and BSC.BS_COMPONENT_REFERENCE ="+obj.id();
+res := getSQLData(req);
+if (arraysize(res)>0){ //arraysize is either 0 or 1
+    res_item := res[0];
+    bs_code := res_item[1];
+    userinfo("The component with code "+getCodeOf("COMPONENTDEF", obj.id(), null)+" is already part of the Business Service "+bs_code);
+    return;
+    }
+
+
+//add the component to the Business Service
+businessService.create("BUSINESSSERVICE_COMPONENT");
+businessService.BS_COMPONENT_REFERENCE := obj.id();
+obj.COMPONENTDEF_STATUS := "ASSIGNED";
+putInCache("COMP_BS_"+obj.id(), businessService_id, "ALWAYS");
+saveObjectsImmediately(obj,businessService);]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_ADD_COMP_SERVICE]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170276" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Add Component to Service]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170277" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Ajouter le composant à un service]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172502" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_ADD_COMP_SERVICE&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>COMPONENTDEF</tablename>
+<classlabel>MxComponentDef</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>COMPONENTDEF_STATUS</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[COMPONENTDEF_STATUS]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[NOT_ASSIGNED]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167799 v11 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_OVERRIDE_CANCEL'" USER="NeoXam" UPDATE_DATE="01/04/2025" UPDATE_TIME="16:26:29" LABEL='Cancel An Override'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_OVERRIDE_CANCEL&quot;,]"  LOCAL_ID="167799" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_OVERRIDE_CANCEL",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule makes it possible to cancel an override. If the override was not yet sent to the Tenant, it will be fully removed. On the other hand, if it was already sent to the Tenant, it will stay and its status will be switched to 'To be cancelled'.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+client_id := obj.BUSINESSSERVICE_CLIENT;
+component_list := array();
+cancelled_status := getListItemId("FT_OVERRIDE_STATUS", "CANCELLED");
+to_be_cancelled_status := getListItemId("FT_OVERRIDE_STATUS", "TO_BE_CANCELLED");
+
+
+//get the list of components present in the Client Service, having an Override that is not cancelled or to be cancelled
+req := "select BSC.BS_COMPONENT_REFERENCE, CD.COMPONENTDEF_CODE from BUSINESSSERVICE_COMPONENT BSC, COMPONENTDEF CD, COMPOVERRIDE CO where BSC.BUSINESSSERVICE_ID ="+obj.id()+" and BSC.BS_COMPONENT_REFERENCE = CD.COMPONENTDEF_ID and BSC.BS_COMPONENT_OVERRIDE is not NULL and CO.COMPOVERRIDE_ID = BSC.BS_COMPONENT_OVERRIDE and CO.COMPOVERRIDE_STATUS not in ("+cancelled_status+","+to_be_cancelled_status+") order by CD.COMPONENTDEF_CODE";
+res := getSQLData(req);
+
+if (arraysize(res)=0){
+  userinfo("No overriden component could be found in this Client Service.");
+  return;
+}
+
+//build the list of Component codes for the pop-up
+if (arraysize(res)>0){
+  for (i:=0; i < arraysize(res); i:= i+1)
+  {
+    res_item := res[i]
+    component_id := res_item[0];
+    component_code := res_item[1];
+    component_list := arrayappend(component_list, component_code);
+    }
+}
+  
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Please pick a Component:";
+MsgDialog[1] := "ARRAY,Component:";
+MsgDialog[2] := component_list;
+
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+    userinfo("No Component was selected.");
+    return;
+    }
+  }
+
+component_code := param[0];
+component := getObjectByCode("COMPONENTDEF", component_code);
+component_id := component.id();
+
+
+record := obj.findRecord("BS_COMPONENT_REFERENCE", component_id);
+if (record = 0){
+  userinfo("No record found in this Client Service for this override.");
+  return;
+}
+else{
+  
+  override_id := obj.BS_COMPONENT_OVERRIDE;
+  override := getObject("MxComponentOverride", override_id);
+  
+  //there are 2 use cases:
+  //1. the override was not sent yet to the Tenant. It can be removed completely.
+  //2. the override was already sent and applied on the Tenant. It can only be cancelled.
+  
+  if (override.COMPOVERRIDE_ON_TENANT != "Y"){
+    obj.BS_COMPONENT_OVERRIDE := '';
+    obj.BUSINESSSERVICE_STATUS := "MODIFS_TO_BE_SENT";
+    saveObjectsImmediately(obj);
+    deleteObjects(override);
+    userinfo("Override deleted for component "+component_code);
+    return;
+  }
+  
+  else{
+    override.COMPOVERRIDE_STATUS := "TO_BE_CANCELLED";
+    obj.BUSINESSSERVICE_STATUS := "MODIFS_TO_BE_SENT";
+    saveObjectsImmediately(obj, override);
+    userinfo("Override status changed to 'To be Cancelled' for component "+component_code);
+    return;
+  }
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_OVERRIDE_CANCEL]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170440" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Cancel An Override]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170441" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Retirer une surcharge]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172590" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_OVERRIDE_CANCEL&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167754 v14 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_CS_DEACTIVATE_ALL_COMP'" USER="NeoXam" UPDATE_DATE="01/04/2025" UPDATE_TIME="16:20:59" LABEL='Deactivate All Components'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_CS_DEACTIVATE_ALL_COMP&quot;,]"  LOCAL_ID="167754" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_CS_DEACTIVATE_ALL_COMP",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, triggered by a user action, will deactivate all Components present in the Client Service.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//loop on the components of the service
+pos := obj.first("BUSINESSSERVICE_COMPONENT");
+while(pos>0){
+  obj.BS_COMPONENT_STATUS := "INACTIVE";
+  pos := obj.next("BUSINESSSERVICE_COMPONENT");
+  }
+
+saveObjectsImmediately(obj);
+return;]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_CS_DEACTIVATE_ALL_COMP]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170356" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Deactivate All Components]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170357" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Désactiver tous les composants]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172543" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_CS_DEACTIVATE_ALL_COMP&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167714 v127 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_OVERRIDE_COMPONENT_CS'" USER="NeoXam" UPDATE_DATE="11/04/2025" UPDATE_TIME="09:20:36" LABEL='Override a Component'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_OVERRIDE_COMPONENT_CS&quot;,]"  LOCAL_ID="167714" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_OVERRIDE_COMPONENT_CS",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, triggered by a user action, makes it possible to override a component.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+client_id := obj.BUSINESSSERVICE_CLIENT;
+component_list := array();
+
+//get the list of components present in the Client Service
+req := "select BSC.BS_COMPONENT_REFERENCE, CD.COMPONENTDEF_CODE from BUSINESSSERVICE_COMPONENT BSC, COMPONENTDEF CD where BSC.BUSINESSSERVICE_ID ="+obj.id()+" and BSC.BS_COMPONENT_REFERENCE = CD.COMPONENTDEF_ID order by CD.COMPONENTDEF_CODE";
+res := getSQLData(req);
+
+if (arraysize(res)=0){
+  return;
+}
+
+//build the list of Component codes for the pop-up
+if (arraysize(res)>0){
+  for (i:=0; i < arraysize(res); i:= i+1)
+  {
+    res_item := res[i]
+    component_id := res_item[0];
+    component_code := res_item[1];
+    component_list := arrayappend(component_list, component_code);
+    }
+}
+  
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Please pick a Component:";
+MsgDialog[1] := "ARRAY,Component:";
+MsgDialog[2] := component_list;
+
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+    userinfo("No Component was selected.");
+    return;
+    }
+  }
+
+component_code := param[0];
+component := getObjectByCode("COMPONENTDEF", component_code);
+component_id := component.id();
+
+//use the override configuration of the config object to know if the override process should be allowed
+config_object_class_id := component.COMPONENTDEF_CLASS;
+config_object_class := getObject("MxClassDef", config_object_class_id);
+
+if (config_object_class.OVERRIDABLE_FLAG != "Y") {
+  userinfo("As per the class definition, this component can not be overriden.");
+  return;
+}
+
+//check if an override already exists
+found_comp := obj.findRecord("BS_COMPONENT_REFERENCE", component_id);
+if (found_comp = 1){
+  if (obj.BS_COMPONENT_OVERRIDE != ''){
+    answer := useryesno("An override already exists for this component. Are you sure you want to replace it?");
+    if (answer != 1){
+      return;
+      }
+  }
+}
+
+///////////////
+//override process is allowed
+///////////////
+
+//if an override already exists for this (client x component), then pick it. otherwise, create it. 
+
+past_override := getObjects("MxComponentOverride", "COMPOVERRIDE_CLIENT="+client_id+" AND COMPOVERRIDE_COMPONENT="+component_id);
+
+if(arraysize(past_override) = 0) {
+  override := createObject("MxComponentOverride");
+  override.COMPOVERRIDE_CLIENT := client_id;
+  override.COMPOVERRIDE_COMPONENT := component_id;
+  //compute a code for the override
+  default_code := "OVERRIDE_"+getCodeOf("FEDERATEDCLIENT", client_id, "INTERNAL")+"_"+getCodeOf("COMPONENTDEF", component_id, null);
+  default_code := strsub(default_code, 0, 250);
+  override.COMPOVERRIDE_CODE := default_code;
+  override.COMPOVERRIDE_LABEL := default_code;
+  }
+else {
+  override := past_override[0];
+}
+
+override.COMPOVERRIDE_STATUS := "TO_BE_APPLIED";
+
+//get the config object behind the componant
+config_object_class_name := getCodeOf("SMARTCLASS", component.COMPONENTDEF_CLASS, null);
+config_object := getObject(config_object_class_name, component.COMPONENTDEF_OBJECT);
+
+//if an override already existed, apply it first before displaying the pop-up
+/*if (override.isNewObject() = 0) {
+  config_object := override.applyOverride();
+  }
+*/
+
+params := array();
+override_param := array("OVERRIDE", "Y");
+params := arrayappend(params, override_param);
+modifs_result := showObjectDetailDialog('', config_object, 1000, 600, params);
+
+if (modifs_result = 1){
+  modifs := config_object.getFieldModifications();
+  
+  //prevent the user from deleting records (until it can be done in the Java code)
+  for(i:=0; i<arraysize(modifs); i:=i+1){
+    modif_item := modifs[i];
+    if (modif_item[5] = 'Record removed'){
+      userinfo("Overriding by removing records is not allowed.");
+      return;
+      }
+    }
+      
+  //no deleted records was detected, 
+  //one can now save the override after having removed its previous details (to avoid for duplicate modifications)
+  pos:=override.first("COMPOVERRIDE_DETAIL");
+  while(pos>0){
+    override.remove("COMPOVERRIDE_DETAIL"); 
+    pos:=override.first("COMPOVERRIDE_DETAIL");
+    }
+
+  for(i:=0; i<arraysize(modifs); i:=i+1){
+    modif_item := modifs[i];
+    modified_field_code := modif_item[2];
+    modified_field_id := config_object_class.getFieldId(modified_field_code);
+    if (modified_field_id > 0){ //check to avoid taking the negative record_id when creating a new record
+      override.create("COMPOVERRIDE_DETAIL");
+      override.COMPOVERRIDE_REC_NUMBER := modif_item[0];
+      override.COMPOVERRIDE_DETAIL_TABLE := modif_item[1];
+      override.COMPOVERRIDE_DETAIL_FIELD := modified_field_id;
+      override.COMPOVERRIDE_DETAIL_PREV_VALUE := modif_item[3];
+      override.COMPOVERRIDE_DETAIL_NEW_VALUE := modif_item[4];
+      if (modif_item[5] = 'New record'){
+        override.COMPOVERRIDE_UPDATE_TYPE := getListItemId("AUDIT_UPDATE_TYPE", "C");
+        }
+      else if (modif_item[5] = 'Record removed'){
+        override.COMPOVERRIDE_UPDATE_TYPE := getListItemId("AUDIT_UPDATE_TYPE", "D");
+        }
+      else {
+        override.COMPOVERRIDE_UPDATE_TYPE := getListItemId("AUDIT_UPDATE_TYPE", "U");
+        }
+      override.COMPOVERRIDE_RECSPEC_DESC := modif_item[6];
+      override.COMPOVERRIDE_DETAIL_RECORD := modif_item[7];
+      }
+  }
+  
+  //check that the override makes sense from a data model point of view
+  config_object := override.applyOverride();
+  if (checkObjects(config_object) != ''){
+    userinfo(checkObjects(config_object));
+    return;
+  }
+  
+  //ask for a Comment
+  MsgDialog := array();
+  MsgDialog[0] := "Please enter a Comment for the Override:";
+  MsgDialog[1] := "STRING,Comment:";
+
+  param := userdialog(MsgDialog[0], MsgDialog);
+  if (not(param)) return;
+  foreach p in param {
+    if (not(p)) {
+      userinfo("Please enter a Comment.");
+      return;
+      }
+  }
+    
+  override_comment := param[0];
+  override_pre_comment := "Override by "+getNameOf("SMARTUSER", actualuserid())+" on "+date()+": ";
+  override.COMPOVERRIDE_COMMENT := strsub(override_pre_comment+override_comment, 0, 250);
+  
+  
+  //update the Client Service with the Override
+  found_comp := obj.findRecord("BS_COMPONENT_REFERENCE", component_id);
+  if (found_comp = 1){
+    obj.BS_COMPONENT_OVERRIDE := override.id();
+    obj.BUSINESSSERVICE_STATUS := "MODIFS_TO_BE_SENT";
+    saveObjectsImmediately(override, obj);
+    userinfo("The component with code "+component_code+" is now overriden.");
+    return;
+    }
+  else{
+    userinfo("The component with code "+component_code+" could not be found at client service level.");
+    return;
+  }
+}
+
+else{
+  abort("Override cancelled by the user.");
+  }]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_OVERRIDE_COMPONENT_CS]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ><![CDATA[Overriding by removing records is not allowed.]]></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170280" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Override a Component]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170281" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Surcharger le composant]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172504" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_OVERRIDE_COMPONENT_CS&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167770 v54 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_REM_COMP_SERVICE_LVL'" USER="NeoXam" UPDATE_DATE="11/04/2025" UPDATE_TIME="09:27:33" LABEL='Remove Component'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_REM_COMP_SERVICE_LVL&quot;,]"  LOCAL_ID="167770" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_REM_COMP_SERVICE_LVL",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, triggered by a user action, allows the user to delete a component from a businessservice.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+component_list := array();
+active_component_list := array();
+objects_to_be_saved := array();
+active_id := getListItemId("FT_SERVICE_STATUS", "ACTIVE");
+uptodate_id := getListItemId("FT_SERVICE_STATUS", "TENANT_UP_TO_DATE");
+yes_flag := getListItemId("YES_NO", "Y");
+
+
+//this action is not to be performed on Business Services that are being created.
+if (obj.isNewObject() = 1){
+  userinfo("Please save the Business Service first.");
+  return;
+}
+
+//get the list of components that are active in at least one of the Client Tenants.
+//Is considered as Active the following components: 
+//1. The component is active in a Client Service
+//2. The component is present (regardless of its state) in a Client Service that has the status 'Modifs to be sent' and that is present on the Tenant. In this case, you can't know for sure the status on the Tenant, so no risk should be taken. All components are considered active.
+req_active := "select distinct(BSC.BS_COMPONENT_REFERENCE) from BUSINESSSERVICE BS, BUSINESSSERVICE_COMPONENT BSC where BS.BUSINESSSERVICE_ID = BSC.BUSINESSSERVICE_ID and BS.BUSINESSSERVICE_TEMPLATE_BS ="+obj.id()+" and (BSC.BS_COMPONENT_STATUS="+active_id+" or (BUSINESSSERVICE_STATUS !="+uptodate_id+" and BUSINESSSERVICE_ON_TENANT ="+yes_flag+"))";
+res_active := getSQLData(req_active);
+if (arraysize(res_active)>0){
+  for (i:=0; i < arraysize(res_active); i:= i+1)
+  {
+    res_active_item := res_active[i]
+    active_component_id := res_active_item[0];
+    active_component_list := arrayappend(active_component_list, active_component_id);
+    }
+  }
+
+//get the list of all Components
+req_all := "select BSC.BS_COMPONENT_REFERENCE, CD.COMPONENTDEF_CODE from BUSINESSSERVICE_COMPONENT BSC, COMPONENTDEF CD where BSC.BUSINESSSERVICE_ID ="+obj.id()+" and BSC.BS_COMPONENT_REFERENCE = CD.COMPONENTDEF_ID order by CD.COMPONENTDEF_CODE";
+res_all := getSQLData(req_all);
+
+//build the list of Components that are active on none of the Client Tenants (only those can be removed)
+if (arraysize(res_all)>0){
+  for (i:=0; i < arraysize(res_all); i:= i+1)
+  {
+    res_all_item := res_all[i]
+    component_id := res_all_item[0];
+    component_code := res_all_item[1];
+    if (arrayfind(active_component_list, component_id) < 0){
+      component_list := arrayappend(component_list, component_code);
+    }
+  }
+}
+
+if (arraysize(component_list)=0)
+{
+  userinfo("Only components that are active in none of the related Client Tenants can be removed. No such component was found.");
+  return;
+}
+
+if (arraysize(component_list)>0){
+  
+  //displaying the pop-up
+  MsgDialog := array();
+  MsgDialog[0] := "Please pick a Component to remove:";
+  MsgDialog[1] := "ARRAY,Component:";
+  MsgDialog[2] := component_list;
+  
+  param := userdialog(MsgDialog[0], MsgDialog);
+  if (not(param)) return;
+  foreach p in param {
+    if (not(p)) {
+      userinfo("No Component was selected.");
+      return;
+      }
+    }
+  
+  component_code := param[0];
+  component := getObjectByCode("COMPONENTDEF", component_code);
+  component_id := component.id();
+  
+  //remove the component from the Business Service and change its status back to 'Not Assigned'
+  found := obj.findRecord("BS_COMPONENT_REFERENCE", component_id);
+  if (found = 1){
+    obj.remove("BUSINESSSERVICE_COMPONENT");
+    component.COMPONENTDEF_STATUS := "NOT_ASSIGNED";
+    objects_to_be_saved := arrayappend(objects_to_be_saved, obj);
+    objects_to_be_saved := arrayappend(objects_to_be_saved, component);
+    }
+  else{
+    userinfo("The component could not be found at Business Service level.");
+    return;
+  }
+
+  //get the list of all related Client Services where the component is present, and remove the component there
+  req := "select BS.BUSINESSSERVICE_ID, BS.BUSINESSSERVICE_CODE from BUSINESSSERVICE BS, BUSINESSSERVICE_COMPONENT BSC where BS.BUSINESSSERVICE_ID = BSC.BUSINESSSERVICE_ID and BS.BUSINESSSERVICE_TEMPLATE_BS ="+obj.id()+" and BSC.BS_COMPONENT_REFERENCE ="+component_id;
+  res := getSQLData(req);
+
+  if (arraysize(res)>0)
+  {
+    impacted_cs := "";
+    impacted_cs := strcat(impacted_cs, "\n");
+
+    for (i:=0; i < arraysize(res); i:= i+1)
+    {
+      impacted_cs_item := res[i];
+      impacted_cs_id := impacted_cs_item[0];
+      impacted_cs_code := impacted_cs_item[1];
+      impacted_cs_obj := getObject("MxBusinessService", impacted_cs_id);
+      found := impacted_cs_obj.findRecord("BS_COMPONENT_REFERENCE", component_id);
+      if (found = 1){
+        impacted_cs_obj.remove("BUSINESSSERVICE_COMPONENT");
+        objects_to_be_saved := arrayappend(objects_to_be_saved, impacted_cs_obj);
+        impacted_cs := strcat(impacted_cs, impacted_cs_code);
+        impacted_cs := strcat(impacted_cs, "\n");
+      }
+    }
+    //userinfo("The component will also be removed in the following related Client Services:"+impacted_cs);
+  }
+}
+
+removeFromCache("COMP_BS_"+component_id);
+saveObjectsImmediately(objects_to_be_saved);
+userinfo("Component removed.");
+return;        ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_REM_COMP_SERVICE_LVL]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170387" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Remove Component]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170388" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Enlever le composant]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172559" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_REM_COMP_SERVICE_LVL&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167806 v7 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_SEND_CS_CONFIG_TO_TENANT'" USER="NeoXam" UPDATE_DATE="04/04/2025" UPDATE_TIME="11:20:27" LABEL='Send Client Service Configuration to Tenant'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_SEND_CS_CONFIG_TO_TENANT&quot;,]"  LOCAL_ID="167806" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_SEND_CS_CONFIG_TO_TENANT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, that is part of a wider task to upgrade a Tenant, will send via WS the Client Service configuration to the Tenant.]]></DESCRIPTION>
+<IMPACT ><![CDATA[client_service_id := arg1;
+client_service := getObject("MxBusinessService", client_service_id);
+
+//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+
+/////////////////////////////////////////////////////
+//get information and initiate variables
+/////////////////////////////////////////////////////
+
+//get the Base URL from the Client
+client_id := client_service.BUSINESSSERVICE_CLIENT;
+client_code := getCodeOf("FEDERATEDCLIENT", client_id, null);
+client := getObject("MxFederatedClient", client_id);
+client_channel_id := client.CLIENT_CHANNEL;
+client_channel := getObject("MxChannel", client_channel_id);
+client_channel_code := getCodeOf("CHANNEL", client_channel_id, null);
+base_url := client_channel.CHANNEL_HTTP_URL; //TODO s'il y a plusieurs URL définies dans le Channel.
+
+
+/////////////////////////////////////////////////////////////////////
+//send Client Service information to the Tenant
+/////////////////////////////////////////////////////////////////////
+
+
+//build the content to be sent to the Tenant
+feedproc_scope := array();
+feedproc_scope := arrayappend(feedproc_scope, client_service_id);
+call_body := feedmap_export("CLIENT_SERVICE_JSON_EXPORT", feedproc_scope, '', '', 'STRING');
+
+//need to check first (via a GET) if the client service already exists on the target Tenant
+//if yes, the call will be a PUT
+//if no, the call will be a POST
+
+cs_code := getCodeOf("BUSINESSSERVICE", client_service_id, null);
+full_cs_get_url := strcat(base_url, "/smartservicegate/resources/ClientService?clientservice_code=", cs_code);
+get_result := httpCall("URL="+full_cs_get_url, "HTTPMETHOD=GET", "HEADERS=Content-Type: application/json", "HTTPCHANNELCODE="+client_channel_code);
+
+
+///////////////////////////////////////////////////
+// PUT case
+//////////////////////////////////////////////////
+    
+if (get_result[0] = 200){ //the client service was found, we will do an update via PUT
+  //first, we get the ID on the Tenant from the get answer
+  get_answer := get_result[2];
+  id_location_begin := strsearch(get_answer, "BUSINESSSERVICE_ID") + strlen('"BUSINESSSERVICE_ID": "');
+  get_answer_truncated := strsub(get_answer, id_location_begin);
+  id_location_end := strsearch(get_answer_truncated, '"');
+  distant_cs_id := strsub(get_answer_truncated, 0, id_location_end);
+  //one can now build the URL
+  full_cs_put_url := strcat(base_url, "/smartservicegate/resources/ClientService/", distant_cs_id);
+  put_result := httpCall("URL="+full_cs_put_url, "HTTPMETHOD=PUT", "HEADERS=Content-Type: application/json", "HTTPCHANNELCODE="+client_channel_code, "INPUTDATA="+call_body);
+  if (put_result[0] != 204){
+    return array("EXIT_1", "Error while sending the content of client service "+client_service.BUSINESSSERVICE_CODE+".\nError "+put_result[0]+": "+put_result[2]);  
+    }
+  else{
+    client_service.BUSINESSSERVICE_ON_TENANT := "Y";
+    client_service.BUSINESSSERVICE_STATUS := "TENANT_UP_TO_DATE";
+    try{
+      saveObjectsImmediately(client_service);
+      } onerror{
+      msg:= error.getMessage();
+      return array("EXIT_1", msg);
+      }
+    return array("EXIT_0", "Client Service "+client_service.BUSINESSSERVICE_CODE+" updated on Tenant.");
+    }
+}
+
+
+///////////////////////////////////////////////////
+// POST case
+//////////////////////////////////////////////////
+  
+else if (get_result[0] = 204){ //the client service was not found, we will do a creation via POST
+  full_cs_post_url := strcat(base_url, "/smartservicegate/resources/ClientService");
+  post_result := httpCall("URL="+full_cs_post_url, "HTTPMETHOD=POST", "HEADERS=Content-Type: application/json", "HTTPCHANNELCODE="+client_channel_code, "INPUTDATA="+call_body);
+  if (post_result[0] != 201){
+    return array("EXIT_1", "Error while sending the content of client service "+client_service.BUSINESSSERVICE_CODE+".\nError "+post_result[0]+": "+post_result[2]);  
+    }
+  else{
+    client_service.BUSINESSSERVICE_ON_TENANT := "Y";
+    client_service.BUSINESSSERVICE_STATUS := "TENANT_UP_TO_DATE";
+    try{
+      saveObjectsImmediately(client_service);
+      } onerror{
+      msg:= error.getMessage();
+      return array("EXIT_1", msg);
+      }
+    return array("EXIT_0", "Client Service "+client_service.BUSINESSSERVICE_CODE+" created on Tenant.");
+    }
+  }
+
+
+///////////////////////////////////////////////////
+// issue with the GET case
+//////////////////////////////////////////////////
+
+    
+else{
+    return array("EXIT_1", "Error while sending the content of client service "+client_service.BUSINESSSERVICE_CODE+".\nError "+get_result[0]+": "+get_result[2]);  
+  }]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_SEND_CS_CONFIG_TO_TENANT]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170454" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Send Client Service Configuration to Tenant]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170455" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Envoyer la configuration du Client Service au Tenant]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;FT_SEND_CS_CONFIG_TO_TENANT&quot;,]"  LOCAL_ID="172597" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[FT_SEND_CS_CONFIG_TO_TENANT]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_SEND_CS_CONFIG_TO_TENANT&quot;,]^CONDITION" VERSION=0>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167805 v25 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_SEND_OVR_TO_TENANT'" USER="NeoXam" UPDATE_DATE="04/04/2025" UPDATE_TIME="11:20:27" LABEL='Send Overrides to Tenant'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_SEND_OVR_TO_TENANT&quot;,]"  LOCAL_ID="167805" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_SEND_OVR_TO_TENANT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, that is part of a wider task to upgrade a Tenant, will send via WS the overrides to the Tenant.]]></DESCRIPTION>
+<IMPACT ><![CDATA[client_service_id := arg1;
+client_service := getObject("MxBusinessService", client_service_id);
+
+//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+
+/////////////////////////////////////////////////////
+//get information and initiate variables
+/////////////////////////////////////////////////////
+
+//get the Base URL from the Client
+client_id := client_service.BUSINESSSERVICE_CLIENT;
+client_code := getCodeOf("FEDERATEDCLIENT", client_id, null);
+client := getObject("MxFederatedClient", client_id);
+client_channel_id := client.CLIENT_CHANNEL;
+client_channel := getObject("MxChannel", client_channel_id);
+client_channel_code := getCodeOf("CHANNEL", client_channel_id, null);
+base_url := client_channel.CHANNEL_HTTP_URL; //TODO s'il y a plusieurs URL définies dans le Channel.
+
+/////////////////////////////////////////////////////////////////////
+//send Overrides to the Tenant
+/////////////////////////////////////////////////////////////////////
+
+pos := client_service.first("BUSINESSSERVICE_COMPONENT");
+nb_ovr_sent := 0;
+while(pos>0){
+  override_id := client_service.BS_COMPONENT_OVERRIDE;
+  component_id := client_service.BS_COMPONENT_REFERENCE;
+  component_code := getCodeOf("COMPONENTDEF", component_id, null);
+  if (override_id != ''){
+    feedproc_scope := array();
+    feedproc_scope := arrayappend(feedproc_scope, override_id);
+    call_body := feedmap_export("OVERRIDE_JSON_EXPORT", feedproc_scope, '', '', 'STRING');
+    //need to check first (via a GET) if the override already exists on the target Tenant
+    //if yes, the call will be a PUT
+    //if no, the call will be a POST
+    override_code := getCodeOf("COMPOVERRIDE", override_id, "");
+    full_ovr_get_url := strcat(base_url, "/smartservicegate/resources/ComponentOverride?override_code=", override_code);
+    get_result := httpCall("URL="+full_ovr_get_url, "HTTPMETHOD=GET", "HEADERS=Content-Type: application/json", "HTTPCHANNELCODE="+client_channel_code);
+
+    ///////////////////////////////////////////////////
+    // PUT case
+    //////////////////////////////////////////////////
+    
+       
+    if (get_result[0] = 200){ //the override was found, we will do an update via PUT
+      //first, we get the ID on the Tenant from the get answer
+      get_answer := get_result[2];
+      id_location_begin := strsearch(get_answer, "COMPOVERRIDE_ID") + strlen('"COMPOVERRIDE_ID": "');
+      get_answer_truncated := strsub(get_answer, id_location_begin);
+      id_location_end := strsearch(get_answer_truncated, '"');
+      distant_override_id := strsub(get_answer_truncated, 0, id_location_end);
+      //one can now build the URL
+      full_ovr_put_url := strcat(base_url, "/smartservicegate/resources/ComponentOverride/", distant_override_id);
+      put_result := httpCall("URL="+full_ovr_put_url, "HTTPMETHOD=PUT", "HEADERS=Content-Type: application/json", "HTTPCHANNELCODE="+client_channel_code, "INPUTDATA="+call_body);
+      if (put_result[0] != 204){
+        return array("EXIT_1", "Error while sending the override for component "+component_code+".\nError"+put_result[0]+": "+put_result[2]);
+        }
+      else{
+        override := getObject("MxComponentOverride", override_id);
+        if (override.COMPOVERRIDE_STATUS = "TO_BE_CANCELLED"){
+          override.COMPOVERRIDE_STATUS := "CANCELLED";
+        }
+        else if (override.COMPOVERRIDE_STATUS = "TO_BE_APPLIED"){
+          override.COMPOVERRIDE_STATUS := "APPLIED";
+        }
+        override.COMPOVERRIDE_ON_TENANT := "Y";
+        try{
+          saveObjectsImmediately(override);
+          nb_ovr_sent := nb_ovr_sent + 1;
+          } onerror{
+          msg:= error.getMessage();
+          return array("EXIT_1", msg);
+          }
+        if (JOBREPORT != ""){
+          job_report := getObject("MxJobReport", JOBREPORT);
+          job_report_comment := job_report_comment +"\n**********************************************";
+          job_report_comment := job_report_comment +"\nOverride updated for component "+component_code;
+          job_report.JOB_COMMENT:=job_report_comment;
+          saveObjectsImmediately(job_report);
+          }
+        }
+    }
+    
+    
+    //////////////////////////////////////////////////////
+    // POST case
+    /////////////////////////////////////////////////////
+    
+    else if (get_result[0] = 204){ //the override was not found, we will do a creation via POST
+      full_ovr_post_url := strcat(base_url, "/smartservicegate/resources/ComponentOverride");
+      post_result := httpCall("URL="+full_ovr_post_url, "HTTPMETHOD=POST", "HEADERS=Content-Type: application/json", "HTTPCHANNELCODE="+client_channel_code, "INPUTDATA="+call_body);
+      if (post_result[0] != 201){
+        return array("EXIT_1", "Error while sending the override for component "+component_code+".\nError"+post_result[0]+": "+post_result[2]);
+        }
+      else{
+        override := getObject("MxComponentOverride", override_id);
+        if (override.COMPOVERRIDE_STATUS = "TO_BE_CANCELLED"){
+          override.COMPOVERRIDE_STATUS := "CANCELLED";
+        }
+        else if (override.COMPOVERRIDE_STATUS = "TO_BE_APPLIED"){
+          override.COMPOVERRIDE_STATUS := "APPLIED";
+        }
+        override.COMPOVERRIDE_ON_TENANT := "Y";
+        try{
+          saveObjectsImmediately(override);
+          nb_ovr_sent := nb_ovr_sent + 1;
+          } onerror{
+          msg:= error.getMessage();
+          return array("EXIT_1", msg);
+          }
+        if (JOBREPORT != ""){
+          job_report := getObject("MxJobReport", JOBREPORT);
+          job_report_comment := job_report_comment +"\n**********************************************";
+          job_report_comment := job_report_comment +"\nOverride created for component "+component_code;
+          job_report.JOB_COMMENT:=job_report_comment;
+          saveObjectsImmediately(job_report);
+          }
+        }
+    }
+    
+    
+    ///////////////////////////////////////////////////////
+    // issue with the initial GET case
+    //////////////////////////////////////////////////////
+    
+    else{
+      return array("EXIT_1", "Error while sending the override for component "+component_code+".\nError"+get_result[0]+": "+get_result[2]);
+    }
+  }
+  pos := client_service.next("BUSINESSSERVICE_COMPONENT");
+  }
+
+return array("EXIT_0", ""+nb_ovr_sent+" overrides sent on Tenant "+client_code);]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_SEND_OVR_TO_TENANT]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170452" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Send Overrides to Tenant]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170453" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Envoyer les surcharges au Tenant]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;FT_SEND_OVR_TO_TENANT&quot;,]"  LOCAL_ID="172596" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[FT_SEND_OVR_TO_TENANT]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_SEND_OVR_TO_TENANT&quot;,]^CONDITION" VERSION=0>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167759 v92 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_SEND_CONFIG_TO_TENANT'" USER="NeoXam" UPDATE_DATE="31/03/2025" UPDATE_TIME="09:54:51" LABEL='Send Target Configuration to Tenant'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_SEND_CONFIG_TO_TENANT&quot;,]"  LOCAL_ID="167759" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_SEND_CONFIG_TO_TENANT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, triggered by a user action from the CS detail screen, will send via WS the full Client Service target configuration to the Tenant.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+client_service_id := obj.id();
+args := array();
+client_service_id_args := array();
+arrayappend(client_service_id_args, "%CLIENT_SERVICE_ID%");
+arrayappend(client_service_id_args, client_service_id);
+arrayappend(args, client_service_id_args);
+
+task := getObjectByCode("SCHEDTASK", "FT_SEND_CONFIG_TO_TENANT");
+msg := task.immediateRequest(args);
+
+if( msg = '"Unable to find the scheduler process associated to the task."' and isinteractive())
+{
+  userinfo(msg +".\nPlease start a scheduler before launching a task");
+}
+else
+{
+  if (isinteractive() and msg != "")
+    userinfo(msg);
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_SEND_CONFIG_TO_TENANT]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170366" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Send Target Configuration to Tenant]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170367" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Envoyer la configuration cible au Tenant]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;53&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172548" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >53</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_SEND_CONFIG_TO_TENANT&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167798 v10 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_COMP_GET_BUSINESS_SERVICE'" USER="NeoXam" UPDATE_DATE="13/03/2025" UPDATE_TIME="17:22:01" LABEL='Component - Get Business Service'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_COMP_GET_BUSINESS_SERVICE&quot;,]"  LOCAL_ID="167798" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_COMP_GET_BUSINESS_SERVICE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[For a given component, this rule will return its business service.]]></DESCRIPTION>
+<IMPACT ><![CDATA[bs_id := getFromCache("COMP_BS_"+obj.id());
+
+//if nothing is found in the Cache, then we perform a full update of the Cache
+//the purpose is to do the SQL request only once
+if (bs_id = ""){
+  //initiate all Business Services ID in Cache to -1
+  req_comp := "select COMPONENTDEF_ID from COMPONENTDEF";
+  res_comp := getSQLData(req_comp);
+  for (i:=0; i < arraysize(res_comp); i:= i+1){
+    res_comp_item := res_comp[i]
+    component_id := res_comp_item[0];
+    putInCache("COMP_BS_"+component_id, -1, "ALWAYS");
+    }
+  //update the Business Services ID for the components that are in a Business Service
+  req := "select BSC.BS_COMPONENT_REFERENCE, BS.BUSINESSSERVICE_ID from BUSINESSSERVICE BS, BUSINESSSERVICE_COMPONENT BSC where BS.BUSINESSSERVICE_ID = BSC.BUSINESSSERVICE_ID and BS.BUSINESSSERVICE_CLIENT is NULL";
+  res := getSQLData(req);
+  for (i:=0; i < arraysize(res); i:= i+1){
+    res_item := res[i]
+    component_id := res_item[0];
+    bs_id := res_item[1];
+    putInCache("COMP_BS_"+component_id, bs_id, "ALWAYS");
+    }
+  }
+
+bs_id := getFromCache("COMP_BS_"+obj.id());
+
+if (bs_id = -1){
+  return "";
+}
+
+return bs_id;]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_COMP_GET_BUSINESS_SERVICE]]></RULE_CODE>
+<RULE_GROUP >COMPUTE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170438" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Component - Get Business Service]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170439" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Composant - Récupérer le business service]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;FT_COMP_GET_BUSINESS_SERVICE&quot;,]"  LOCAL_ID="172589" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[FT_COMP_GET_BUSINESS_SERVICE]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_COMP_GET_BUSINESS_SERVICE&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>COMPONENTDEF</tablename>
+<classlabel>MxComponentDef</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167801 v4 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_CREATE_BUSINESS_SERVICE'" USER="NeoXam" UPDATE_DATE="01/04/2025" UPDATE_TIME="16:34:34" LABEL='Create New Business Service'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_CREATE_BUSINESS_SERVICE&quot;,]"  LOCAL_ID="167801" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_CREATE_BUSINESS_SERVICE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Please fill at least the code and name of the Business Service to be created:";
+MsgDialog[1] := "STRING,Code:";
+MsgDialog[2] := "STRING,Name:";
+MsgDialog[3] := "LIST/FT_COMPONENT_SCOPE,Scope:";
+MsgDialog[4] := "LIST/FT_COMPONENT_CATEGORY,Category:";
+
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+/*foreach p in param {
+  if (not(p)) {
+     userinfo("All information must be filled in.");
+     return;
+  }
+}*/
+
+//get the parameters
+businessService_code := param[0];
+businessService_name := param[1];
+businessService_scope := param[2];
+businessService_category := param[3];
+
+if ((businessService_code = '') or (businessService_name = '')){
+  userinfo("Please fill both the code and the name of the Business Service to be created.");
+  return;
+}
+
+//create new Business Service
+businessService := createObject("MxBusinessService");
+businessService.BUSINESSSERVICE_CODE := businessService_code;
+businessService.NAME[NAME_LANGUAGE=0] := businessService_name;
+businessService.BUSINESSSERVICE_GROUP := businessService_scope;
+businessService.BUSINESSSERVICE_CATEGORY := businessService_category;
+businessService.BUSINESSSERVICE_CREATION_DATE := today();
+businessService.BUSINESSSERVICE_STATUS := "INACTIVE";
+
+saveObjectsImmediately(businessService);
+
+userinfo("The Business Service was successfully created.");]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_CREATE_BUSINESS_SERVICE]]></RULE_CODE>
+<RULE_GROUP >CREATE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170444" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Create New Business Service]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170445" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Créer un service business]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;53&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172592" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >53</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_CREATE_BUSINESS_SERVICE&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167713 v82 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_CREATE_CLIENT_SERVICE'" USER="NeoXam" UPDATE_DATE="01/04/2025" UPDATE_TIME="16:38:07" LABEL='Create New Client Service'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_CREATE_CLIENT_SERVICE&quot;,]"  LOCAL_ID="167713" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_CREATE_CLIENT_SERVICE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Please pick a Client and an active Business Service:";
+MsgDialog[1] := "REFERENCE/FEDERATEDCLIENT,Client:";
+MsgDialog[2] := "REFERENCE/BUSINESSSERVICE/ACTIVE_BS,Business Service:";
+
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+     userinfo("All information must be filled in.");
+     return;
+  }
+}
+
+//get the Client and the Business Service
+client_id := param[0];
+client := getObject("MxFederatedClient", client_id);
+businessService_id := param[1];
+businessService := getObject("MxBusinessService", businessService_id);
+
+//check first if the Client Service does not already exist
+req := "select BUSINESSSERVICE_TEMPLATE_BS, BUSINESSSERVICE_CLIENT from BUSINESSSERVICE";
+res := getSqlData(req);
+for(i:=0; i<arraysize(res); i:=i+1){
+  res_item := res[i];
+  concat_res_item := strcat(res_item[0], '_', res_item[1]);
+  if (concat_res_item = strcat(businessService_id, '_', client_id)){
+    userinfo("This Business Service is already associated with this Client.");
+    return array("EXIT_1", "This Business Service is already associated with this Client.");
+  }
+}
+
+//create new Client Service
+clientService := businessService.makecopy();
+clientService.BUSINESSSERVICE_CODE := strcat(getCodeOf("FEDERATEDCLIENT", client_id, "INTERNAL"), "_", getCodeOf("BUSINESSSERVICE", businessService_id, null));
+clientService.NAME[NAME_LANGUAGE = 0] := strcat(getNameOf("FEDERATEDCLIENT", client_id, null), " - ", getNameOf("BUSINESSSERVICE", businessService_id, null));
+clientService.BUSINESSSERVICE_CREATION_DATE := today();
+clientService.BUSINESSSERVICE_TEMPLATE_BS := businessService_id;
+clientService.BUSINESSSERVICE_CLIENT := client_id;
+clientService.BUSINESSSERVICE_STATUS := "MODIFS_TO_BE_SENT";
+
+//inactivate all components of the newly-created client service
+pos := clientService.first("BUSINESSSERVICE_COMPONENT");
+while(pos>0){
+  clientService.BS_COMPONENT_STATUS := "INACTIVE";
+  pos := clientService.next("BUSINESSSERVICE_COMPONENT");
+  }
+saveObjectsImmediately(clientService);
+
+userinfo("The Client Service was successfully created.");]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_CREATE_CLIENT_SERVICE]]></RULE_CODE>
+<RULE_GROUP >CREATE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170278" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Create New Client Service]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170279" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Créer un service client]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;53&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172503" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >53</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_CREATE_CLIENT_SERVICE&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167802 v14 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_DELETE_BUSINESS_SERVICE'" USER="NeoXam" UPDATE_DATE="07/04/2025" UPDATE_TIME="17:54:44" LABEL='Delete Business Service'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_DELETE_BUSINESS_SERVICE&quot;,]"  LOCAL_ID="167802" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_DELETE_BUSINESS_SERVICE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//only Business Services with Inactive status can be deleted
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Only inactive Business Services can be deleted:";
+MsgDialog[1] := "REFERENCE/BUSINESSSERVICE/INACTIVE_BS,Business Service:";
+  
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+     userinfo("All information must be filled in.");
+     return;
+  }
+}
+
+try{
+
+businessService_id := param[0];
+businessService := getObject("MxBusinessService", businessService_id);
+
+//remove all components, and unassign them
+components_to_be_saved := array();
+pos := businessService.first("BUSINESSSERVICE_COMPONENT");
+while(pos>0){
+  component_id := businessService.BS_COMPONENT_REFERENCE;
+  component := getObject("MxComponentDef", component_id);
+  component.COMPONENTDEF_STATUS := "NOT_ASSIGNED";
+  components_to_be_saved := arrayappend(components_to_be_saved, component);
+  businessService.remove("BUSINESSSERVICE_COMPONENT");
+  removeFromCache("COMP_BS_"+component_id);
+  pos := businessService.next("BUSINESSSERVICE_COMPONENT");
+  }
+
+saveObjectsImmediately(businessService, components_to_be_saved);
+
+if (businessService.count("BUSINESSSERVICE_COMPONENT") != 0){
+  abort("Issue with the deletion of components.");
+  }
+
+//delete the business service
+deleteObjectsImmediately(businessService);
+
+} onerror{
+  msg:= error.getMessage();
+  userinfo(msg);
+  return array("EXIT_1", msg);
+}
+
+userinfo("The Business Service was successfully deleted.");]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_DELETE_BUSINESS_SERVICE]]></RULE_CODE>
+<RULE_GROUP >CREATE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170446" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Delete Business Service]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170447" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Effacer un service business]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;53&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172593" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >53</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_DELETE_BUSINESS_SERVICE&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167803 v4 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_DELETE_CLIENT_SERVICE'" USER="NeoXam" UPDATE_DATE="31/03/2025" UPDATE_TIME="10:43:01" LABEL='Delete Client Service'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_DELETE_CLIENT_SERVICE&quot;,]"  LOCAL_ID="167803" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_DELETE_CLIENT_SERVICE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//only Client Services with Inactive status can be deleted
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Only Client Services not yet present on the Tenant can be deleted:";
+MsgDialog[1] := "REFERENCE/BUSINESSSERVICE/CS_NOT_YET_ON_TENANT,Client Service:";
+  
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+     userinfo("All information must be filled in.");
+     return;
+  }
+}
+  
+//delete the client service
+clientService_id := param[0];
+clientService := getObject("MxBusinessService", clientService_id);
+
+try{
+deleteObjectsImmediately(clientService);
+} onerror{
+  msg:= error.getMessage();
+  userinfo(msg);
+  return array("EXIT_1", msg);
+}
+
+userinfo("The Client Service was successfully deleted.");]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_DELETE_CLIENT_SERVICE]]></RULE_CODE>
+<RULE_GROUP >CREATE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170448" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Delete Client Service]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170449" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Effacer un service client]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;53&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172594" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >53</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_DELETE_CLIENT_SERVICE&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167762 v19 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_CS_SHOW_OVR_COMP'" USER="NeoXam" UPDATE_DATE="07/04/2025" UPDATE_TIME="11:40:16" LABEL='Show Component (With Override)'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_CS_SHOW_OVR_COMP&quot;,]"  LOCAL_ID="167762" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_CS_SHOW_OVR_COMP",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[-]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+client_id := obj.BUSINESSSERVICE_CLIENT;
+component_list := array();
+
+//get the list of components present in the Client Service
+req := "select BSC.BS_COMPONENT_REFERENCE, CD.COMPONENTDEF_CODE from BUSINESSSERVICE_COMPONENT BSC, COMPONENTDEF CD where BSC.BUSINESSSERVICE_ID ="+obj.id()+" and BSC.BS_COMPONENT_REFERENCE = CD.COMPONENTDEF_ID order by CD.COMPONENTDEF_CODE";
+res := getSQLData(req);
+
+if (arraysize(res)=0){
+  return;
+}
+
+//build the list of Component codes for the pop-up
+if (arraysize(res)>0){
+  for (i:=0; i < arraysize(res); i:= i+1)
+  {
+    res_item := res[i]
+    component_id := res_item[0];
+    component_code := res_item[1];
+    component_list := arrayappend(component_list, component_code);
+    }
+}
+  
+//displaying the pop-up
+MsgDialog := array();
+MsgDialog[0] := "Please pick a Component:";
+MsgDialog[1] := "ARRAY,Component:";
+MsgDialog[2] := component_list;
+
+param := userdialog(MsgDialog[0], MsgDialog);
+if (not(param)) return;
+foreach p in param {
+  if (not(p)) {
+    userinfo("No Component was selected.");
+    return;
+    }
+  }
+
+component_code := param[0];
+component := getObjectByCode("COMPONENTDEF", component_code);
+component_id := component.id();
+
+//get the config object behind the componant
+config_object_class_name := getCodeOf("SMARTCLASS", component.COMPONENTDEF_CLASS, null);
+config_object := getObject(config_object_class_name, component.COMPONENTDEF_OBJECT);
+
+//get the override
+req := "select COMPOVERRIDE_ID from COMPOVERRIDE where COMPOVERRIDE_CLIENT="+client_id+" and COMPOVERRIDE_COMPONENT ="+component_id;
+res := getSQLData(req);
+
+if (arraysize(res)=0){
+  override_id := '';
+}
+else {
+  res_item := res[0];
+  override_id := res_item[0]; // arraysize is either equal to 0 or to 1
+  override := getObject("MxComponentOverride", override_id);
+}
+
+if (override != '') {
+  config_object := override.applyOverride();
+  }
+
+params := array();
+override_param := array("READ-ONLY", "Y");
+params := arrayappend(params, override_param);
+detail_dialog := showObjectDetailDialog('', config_object, 1000, 600, params);
+
+return;]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_CS_SHOW_OVR_COMP]]></RULE_CODE>
+<RULE_GROUP >DISPLAY</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170372" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Show Component (With Override)]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170373" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Afficher le composant (avec sa surcharge)]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172551" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_CS_SHOW_OVR_COMP&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167726 v3 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_CHECK_COMP_EXIST'" USER="NeoXam" UPDATE_DATE="22/11/2024" UPDATE_TIME="15:45:41" LABEL='Component - Check Existence'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_CHECK_COMP_EXIST&quot;,]"  LOCAL_ID="167726" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_CHECK_COMP_EXIST",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[class_id := arg1;
+object_id := arg2;
+
+
+req := "select COMPONENTDEF_ID, COMPONENTDEF_CLASS, COMPONENTDEF_OBJECT from COMPONENTDEF_CONFIG";
+res := getSqlData(req);
+for(i:=0; i<arraysize(res); i:=i+1){
+  res_item := res[i];
+  concat_res_item := strcat(res_item[1], '_', res_item[2]);
+  if (concat_res_item = strcat(class_id, '_', object_id)){
+    return res_item[0];
+  }
+}
+
+return '';]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_CHECK_COMP_EXIST]]></RULE_CODE>
+<RULE_GROUP >UTILS</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ><![CDATA[This rule takes as argument the class_id and object_id of a given object.
+It will check whether a component already exists for this object, and returns its ID if found.]]></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170302" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Component - Check Existence]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170303" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Composant - Vérifier l'existence]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;FT_CHECK_COMP_EXIST&quot;,]"  LOCAL_ID="172516" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[FT_CHECK_COMP_EXIST]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_CHECK_COMP_EXIST&quot;,]^CONDITION" VERSION=0>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167796 v12 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_MASS_COMP_CREATION'" USER="NeoXam" UPDATE_DATE="14/03/2025" UPDATE_TIME="13:55:09" LABEL='Component - Mass Creation'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_MASS_COMP_CREATION&quot;,]"  LOCAL_ID="167796" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, used for initialization purpose, will generate a component for all objects of all classes that are eligible to become components.]]></DESCRIPTION>
+<IMPACT ><![CDATA[yes_flag := getListItemId("YES_NO", "Y");
+req := "select SMARTCLASS_ID from SMARTCLASS where COMPONENT_ELIGIBILITY_FLAG="+yes_flag+" order by SMARTCLASS_ID";
+res := getSQLData(req);
+job_report_comment := "";
+
+for(i:=0; i<arraysize(res); i:=i+1){
+  res_item := res[i];
+  config_class_id := res_item[0];
+  mass_creation_result := FT_MASS_COMP_CREATION_GENERIC(config_class_id, JOBREPORT, job_report_comment);
+  if(mass_creation_result[0] = "EXIT_1"){
+    return array("EXIT_1", mass_creation_result[1]);
+  }
+  else{
+    msgtrace(mass_creation_result[1]);
+    job_report_comment := mass_creation_result[2];
+  }
+}
+
+return array("EXIT_0", "Component mass creation successfully performed");]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_MASS_COMP_CREATION]]></RULE_CODE>
+<RULE_GROUP >UTILS</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170434" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Component - Mass Creation]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170435" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Composant - Création en masse]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;FT_MASS_COMP_CREATION&quot;,]"  LOCAL_ID="172587" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[FT_MASS_COMP_CREATION]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167795 v26 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_MASS_COMP_CREATION_GENERIC'" USER="NeoXam" UPDATE_DATE="11/04/2025" UPDATE_TIME="09:16:56" LABEL='Component - Mass Creation (Generic Class)'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_MASS_COMP_CREATION_GENERIC&quot;,]"  LOCAL_ID="167795" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ></CONDITION>
+<DESCRIPTION ><![CDATA[This rule, used for initialization purpose, will generate a component for all objects of a class given as argument.]]></DESCRIPTION>
+<IMPACT ><![CDATA[config_class_id := arg1;
+job_report_id := arg2;
+job_report_comment := arg3;
+config_class_object := getObject("MxClassDef", config_class_id);
+config_class_name := getCodeOf("SMARTCLASS", config_class_id, null);
+
+try{
+
+//get main table name
+req := "select TABLE_NAME from SMARTCLASS_TABLE where REC_TYPE=0 and SMARTCLASS_ID="+config_class_id;
+res := getSQLData(req);
+res_item := res[0];
+main_table := res_item[0];
+
+//get all objects ID
+req := "select "+main_table+"_ID from "+main_table;
+res := getSQLData(req);
+
+//the request will be processed by bulk
+bulkSize:=100;
+nbRead:=0;
+nbSaved:=0;
+  
+while (nbRead < arraysize(res)){
+    
+    nb:=0;
+    if(nbRead+bulkSize > arraysize(res)){
+      bulkSize:=arraysize(res)-nbRead; //mandatory to process correctly the last bulk
+    }
+    
+    //get the IDs that will be processed during that bulk
+    bulk_ids:=array();
+    while (nb<bulkSize){
+      line:=res[nb+nbRead];
+      line_id:=line[0];
+      bulk_ids:=arrayappend(bulk_ids, line_id);
+      nb:=nb+1;
+    }
+    nbRead:=nbRead+nb;
+    
+    //process the bulk
+    objects_to_be_saved := array();
+    for(i:=0; i<arraysize(bulk_ids); i:=i+1){
+      config_object_id := bulk_ids[i];
+      config_object_code := getCodeOf(main_table, config_object_id, null);
+      config_object_name := getNameOf(main_table, config_object_id);
+      ComponentObj_id := FT_CHECK_COMP_EXIST(config_class_id, config_object_id);
+      if (ComponentObj_id = ''){
+        ComponentObj := createobject("MxComponentDef");
+        ComponentObj.COMPONENTDEF_CLASS := config_class_id;
+        ComponentObj.COMPONENTDEF_OBJECT := config_object_id;
+        ComponentObj.COMPONENTDEF_CODE  := strsub(strcat(main_table, "_", config_object_code), 0, 250);
+        ComponentObj.NAME[NAME_LANGUAGE=0] := strsub(strcat(config_class_name, " - ", config_object_name), 0, 250);
+        ComponentObj.COMPONENTDEF_STATUS := "NOT_ASSIGNED";
+        objects_to_be_saved := arrayappend(objects_to_be_saved, ComponentObj);
+        }
+      }
+        
+    saveObjectsImmediately(objects_to_be_saved);
+    nbSaved := nbSaved + arraysize(objects_to_be_saved);
+    if (job_report_id != ""){
+      job_report := getObject("MxJobReport", job_report_id);
+      job_report_comment := job_report_comment +"\n**********************************************";
+      job_report_comment := job_report_comment +"\n"+nbSaved+" components successfully created for class "+config_class_name;
+      job_report.JOB_COMMENT:=job_report_comment;
+      saveObjectsImmediately(job_report);
+      }
+  }
+    
+} onerror{
+  msg:= error.getMessage();
+  return array("EXIT_1", msg);
+}
+
+return_comment := "";
+return_comment := return_comment+nbSaved+" components successfully created for class "+config_class_name;
+return array("EXIT_0", return_comment, job_report_comment);]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_MASS_COMP_CREATION_GENERIC]]></RULE_CODE>
+<RULE_GROUP >UTILS</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170432" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Component - Mass Creation (Generic Class)]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170433" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Composant - Création en masse (classe générique)]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;FT_MASS_COMP_CREATION_GENERIC&quot;,]"  LOCAL_ID="172586" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[FT_MASS_COMP_CREATION_GENERIC]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167810 v21 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_OVR_ROLLBACK'" USER="NeoXam" UPDATE_DATE="11/04/2025" UPDATE_TIME="09:28:38" LABEL='Override - Rollback'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_OVR_ROLLBACK&quot;,]"  LOCAL_ID="167810" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ></CONDITION>
+<DESCRIPTION ><![CDATA[This rule makes it possible to rollback an override. It is called before applying an updated one.]]></DESCRIPTION>
+<IMPACT ><![CDATA[override_id := arg1;
+
+//get back the configuration object behind the override
+override := getObject("MxComponentOverride", override_id);
+component_id := override.COMPOVERRIDE_COMPONENT;
+component := getObject("MxComponentDef", component_id);
+config_object_class_name := getCodeOf("SMARTCLASS", component.COMPONENTDEF_CLASS, null);
+config_object_class := getObject("MxClassDef", component.COMPONENTDEF_CLASS);
+config_object_class.moveto("SMARTCLASS_TABLE",0);
+config_object_main_table := config_object_class.TABLE_NAME;
+config_object := getObject(config_object_class_name, component.COMPONENTDEF_OBJECT);
+config_object_id := config_object.id();
+
+try{
+
+//revert the 'Data Update' overrides
+pos:=override.first("COMPOVERRIDE_DETAIL");
+while(pos>0){
+  if(override.COMPOVERRIDE_UPDATE_TYPE = "U"){ //the focus here is only one updated data
+    
+    field_id_to_be_changed := override.COMPOVERRIDE_DETAIL_FIELD;
+    field_to_be_changed := getCodeOf("SMARTCLASS_FIELD", field_id_to_be_changed, null);
+    previous_value := override.COMPOVERRIDE_DETAIL_PREV_VALUE;
+    
+    //case 1: no RecSpec
+    if (override.COMPOVERRIDE_RECSPEC_DESC = ''){
+      config_object.set(field_to_be_changed, -1, previous_value);
+      }
+    
+    //case 2: there is a RecSpec
+    else{
+      modified_table_id := override.COMPOVERRIDE_DETAIL_TABLE;
+      modified_table_name := getCodeOf("SMARTCLASS_TABLE", modified_table_id, null);
+      modified_table_key := strcat(modified_table_name, "_ID");
+      modified_record_id := override.COMPOVERRIDE_DETAIL_RECORD;
+      found_record := config_object.findRecord(modified_table_key, modified_record_id);
+      if (found_record = 1){
+        config_object.set(field_to_be_changed, -1, previous_value);
+        }
+      }
+    }
+  pos:=override.next("COMPOVERRIDE_DETAIL");
+  }
+
+
+//remove the added records
+created_flag := getListItemId("AUDIT_UPDATE_TYPE", "C");
+
+//first, get the list of created records in the config object - there is one record in COMPOVERRIDE_DETAIL for each modified field in each created record, so we need to add the DISTINCT operator in the request
+req := "select distinct(CONCAT(COMPOVERRIDE_DETAIL_TABLE,COMPOVERRIDE_REC_NUMBER)), COMPOVERRIDE_DETAIL_TABLE, COMPOVERRIDE_REC_NUMBER from COMPOVERRIDE_DETAIL where COMPOVERRIDE_ID="+override_id+" and COMPOVERRIDE_UPDATE_TYPE="+created_flag;
+res := getSQLData(req);
+
+if (arraysize(res) > 0){
+  for (i:=0; i < arraysize(res); i:= i+1)
+  {
+    res_item := res[i]
+    modified_table_id := res_item[1];
+    modified_table_name := getCodeOf("SMARTCLASS_TABLE", modified_table_id, null);
+    modified_table_key := strcat(modified_table_name, "_ID");
+    created_rec_number := res_item[2];
+    
+    //the Override object contains only the relative # of the record in the table, not the real record ID
+    //so we need to get the list of records in the table, and find which real record ID corresponds to the relative # of the record in the table in the override
+    req_record := "select "+modified_table_key+" from "+modified_table_name+" where "+config_object_main_table+"_ID ="+config_object_id+" order by "+modified_table_key+" asc";
+    res_record := getSQLData(req_record);
+    if (arraysize(res_record) > 0){
+      created_record_item := res_record[created_rec_number];
+      created_record_id := created_record_item[0];
+      found_record := config_object.findRecord(modified_table_key, created_record_id);
+      if (found_record = 1){
+        config_object.remove(modified_table_name);
+        } 
+      }
+  }
+}
+  
+config_object.setAuditComment("Override rollback", 1);
+saveObjectsImmediately(config_object);
+return array("EXIT_0", "Rollback successful");
+
+} onerror{
+  msg:= error.getMessage();
+  return array("EXIT_1", msg);
+}
+                       ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_OVR_ROLLBACK]]></RULE_CODE>
+<RULE_GROUP >UTILS</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ><![CDATA[To be replaced by a proper rollbackOverride() method.]]></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170460" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Override - Rollback]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170461" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Surcharge - rollback]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;FT_OVR_ROLLBACK&quot;,]"  LOCAL_ID="172600" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[FT_OVR_ROLLBACK]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167738 v23 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_BS_ADD_NEW_COMP'" USER="NeoXam" UPDATE_DATE="31/03/2025" UPDATE_TIME="11:09:56" LABEL='Business Service - Addition of a New Component'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_BS_ADD_NEW_COMP&quot;,]"  LOCAL_ID="167738" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_BS_ADD_NEW_COMP",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[When a new Component is added in a Business Service, the new Component is also added in the related Client Services.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//check whether a new record was added. if not, return
+found := 0;
+pos:=obj.first("BUSINESSSERVICE_COMPONENT");
+while(pos>0){
+  if (obj.isNewRecord("BUSINESSSERVICE_COMPONENT") = 1){
+    found := 1;
+  }
+  pos:=obj.next("BUSINESSSERVICE_COMPONENT");
+  }
+if (found = 0){
+  return;
+}
+
+
+//at least one new record was added. get the list of all related Client Services
+req := "select BUSINESSSERVICE_ID from BUSINESSSERVICE where BUSINESSSERVICE_TEMPLATE_BS ="+obj.id();
+res := getSQLData(req);
+array_impacted_cs := array();
+for (i:=0; i < arraysize(res); i:= i+1){
+  impacted_cs_item := res[i];
+  impacted_cs_id := impacted_cs_item[0];
+  impacted_cs_obj := getObject("MxBusinessService", impacted_cs_id);
+  array_impacted_cs := arrayappend(array_impacted_cs, impacted_cs_obj);
+  }
+
+//for each newly-added record, add it in the impacted CS as well
+pos:=obj.first("BUSINESSSERVICE_COMPONENT");
+while(pos>0){
+  if (obj.isNewRecord("BUSINESSSERVICE_COMPONENT") = 1){
+    for (i:=0; i < arraysize(array_impacted_cs); i:= i+1)
+    {
+      impacted_cs_obj := array_impacted_cs[i];
+      impacted_cs_obj.create("BUSINESSSERVICE_COMPONENT");
+      impacted_cs_obj.BS_COMPONENT_REFERENCE := obj.BS_COMPONENT_REFERENCE;
+      impacted_cs_obj.BS_COMPONENT_STATUS := "INACTIVE";
+      obj.join(impacted_cs_obj);
+      }
+    }
+  pos:=obj.next("BUSINESSSERVICE_COMPONENT");
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_BS_ADD_NEW_COMP]]></RULE_CODE>
+<RULE_GROUP >WORKFLOW</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170324" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Business Service - Addition of a New Component]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170325" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Business Service - Ajout d'un nouveau composant]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;12&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172527" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >12</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_BS_ADD_NEW_COMP&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<LOGICALOPER>1</LOGICALOPER>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167735 v11 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_CHECK_BS_STATUS'" USER="NeoXam" UPDATE_DATE="19/03/2025" UPDATE_TIME="17:04:36" LABEL='Business Service - Check on Status Inactivation'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_CHECK_BS_STATUS&quot;,]"  LOCAL_ID="167735" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_CHECK_BS_STATUS",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule will prevent the status of a Business Service to be set to 'Inactive' if there is at least one linked Customer Service.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+active_id := getListItemId("FT_SERVICE_STATUS", "ACTIVE");
+
+//the rule is to be triggered only if the Business Service has initially the 'Active' status.
+if (obj.BUSINESSSERVICE_STATUS = "INACTIVE"){
+  return;
+}
+
+//get the list of all related Client Services
+req := "select BUSINESSSERVICE_CODE from BUSINESSSERVICE where BUSINESSSERVICE_TEMPLATE_BS ="+obj.id();
+res := getSQLData(req);
+
+//the user should first remove all related Client Services before inactivating this Business Service.
+if (arraysize(res)>0)
+{
+  impacted_cs := "";
+  impacted_cs := strcat(impacted_cs, "\n");
+  
+  for (i:=0; i < arraysize(res); i:= i+1)
+  {
+     impacted_cs_item := res[i];
+     impacted_cs_code := impacted_cs_item[0];
+     impacted_cs := strcat(impacted_cs, impacted_cs_code);
+     impacted_cs := strcat(impacted_cs, "\n");
+  }
+  
+  abort("Please remove the following Client Services before inactivating this Business Service:"+impacted_cs);
+}
+
+return;]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_CHECK_BS_STATUS]]></RULE_CODE>
+<RULE_GROUP >WORKFLOW</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170318" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Business Service - Check on Status Inactivation]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170319" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Business Service - Vérification sur l'inact. du statut]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;40&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;BUSINESSSERVICE_STATUS&quot;,]"  LOCAL_ID="172524" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[BUSINESSSERVICE_STATUS]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >40</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_CHECK_BS_STATUS&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<LOGICALOPER>1</LOGICALOPER>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167736 v3 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_INACTIVATE_NEW_BS'" USER="NeoXam" UPDATE_DATE="19/03/2025" UPDATE_TIME="17:04:36" LABEL='Business Service - Inactivate Newly-created BS'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_INACTIVATE_NEW_BS&quot;,]"  LOCAL_ID="167736" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_INACTIVATE_NEW_BS",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[A newly-created Business Service has its status automatically set to 'Inactive'.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+obj.BUSINESSSERVICE_STATUS := "INACTIVE";]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_INACTIVATE_NEW_BS]]></RULE_CODE>
+<RULE_GROUP >WORKFLOW</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170320" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Business Service - Inactivate Newly-created BS]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170321" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Business Service - Inactiver les BS nouvellement créés]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;10&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172525" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >10</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_INACTIVATE_NEW_BS&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167808 v1 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_CHANGE_CS_STATUS'" USER="NeoXam" UPDATE_DATE="31/03/2025" UPDATE_TIME="11:56:15" LABEL='Client Service - Status Update Upon Modification'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_CHANGE_CS_STATUS&quot;,]"  LOCAL_ID="167808" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_CHANGE_CS_STATUS",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Whenever something is changed in a Client Service on the Central, its status will move to 'Modifications to Be Sent'.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is meant to be triggered on the Central only
+if (getTenantCode() != 'CENTRAL') return;
+
+//do not trigger the process for fields corresponding to the update on the Tenant
+if (obj.isFieldModified("BUSINESSSERVICE_ON_TENANT") = 1 or obj.isFieldModified("BUSINESSSERVICE_STATUS") = 1){
+  return;
+  }
+else {
+  obj.BUSINESSSERVICE_STATUS := "MODIFS_TO_BE_SENT";
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_CHANGE_CS_STATUS]]></RULE_CODE>
+<RULE_GROUP >WORKFLOW</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170456" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Client Service - Status Update Upon Modification]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170457" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Client Service - Changement du statut à la modification]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;12&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172598" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >12</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_CHANGE_CS_STATUS&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<LOGICALOPER>1</LOGICALOPER>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167742 v32 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_TENANT_CONFIG_OBJECT_ACTIV'" USER="NeoXam" UPDATE_DATE="02/04/2025" UPDATE_TIME="09:28:23" LABEL='Tenant - Config Object Activation/Deact'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_TENANT_CONFIG_OBJECT_ACTIV&quot;,]"  LOCAL_ID="167742" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_TENANT_CONFIG_OBJECT_ACTIV",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule is triggered on the Tenant, when a Component gets activated or deactivated in the Client Service. The corresponding Configuration Object gets activated/deactivated accordingly.]]></DESCRIPTION>
+<IMPACT ><![CDATA[active_status := getListItemId("FT_SERVICE_STATUS", "ACTIVE");
+inactive_status := getListItemId("FT_SERVICE_STATUS", "INACTIVE");
+yes_flag := getListItemId("YES_NO", "Y");
+no_flag := getListItemId("YES_NO", "N");
+objects_to_be_saved := array();
+
+//this rule is to be triggered on Tenants only
+if (getTenantCode() = 'CENTRAL') return;
+
+//launch the process
+pos := obj.first("BUSINESSSERVICE_COMPONENT");
+while(pos>0){
+  component_id := obj.BS_COMPONENT_REFERENCE;
+  component := getObject("MxComponentDef", component_id);
+  config_object_class_name := getCodeOf("SMARTCLASS", component.COMPONENTDEF_CLASS, null);
+  config_object := getObject(config_object_class_name, component.COMPONENTDEF_OBJECT);
+  config_object_class := getObject("MxClassDef", component.COMPONENTDEF_CLASS);
+  config_object_class.moveto("SMARTCLASS_TABLE",0); //to make sure we get the activation field from the main table
+  config_object_activation_flag := config_object_class.ACTIVATION_FIELD;
+  
+  if (config_object_activation_flag = ''){
+    msgtrace("No Activation Field defined for class: "+config_object_class_name);
+    }
+    
+  else{
+    component_new_status := obj.BS_COMPONENT_STATUS;
+    if (component_new_status = active_status){
+      config_object.set(config_object_activation_flag, -1, yes_flag);
+      config_object.setAuditComment("Activation from Client Service", 1);
+      }
+    if (component_new_status = inactive_status){
+      config_object.set(config_object_activation_flag, -1, no_flag);
+      config_object.setAuditComment("Deactivation from Client Service", 1);
+      }
+      objects_to_be_saved := arrayappend(objects_to_be_saved, config_object);
+    }
+  
+  pos:=obj.next("BUSINESSSERVICE_COMPONENT");
+  }
+
+//update the Client Service status (even though the information is less important here than on the Central)
+obj.BUSINESSSERVICE_ON_TENANT := "Y";
+obj.BUSINESSSERVICE_STATUS := "TENANT_UP_TO_DATE";
+
+saveObjectsImmediately(objects_to_be_saved);]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_TENANT_CONFIG_OBJECT_ACTIV]]></RULE_CODE>
+<RULE_GROUP >WORKFLOW</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170332" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Tenant - Config Object Activation/Deact]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170333" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Tenant - Activation/déact. de l'objet de configuration]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;12&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172531" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >12</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_TENANT_CONFIG_OBJECT_ACTIV&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>BUSINESSSERVICE</tablename>
+<classlabel>MxBusinessService</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_CLIENT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<LOGICALOPER>1</LOGICALOPER>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_CLIENT]]></fieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESSSERVICE_TEMPLATE_BS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESSSERVICE_TEMPLATE_BS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167797 v11 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_TENANT_MASS_OVR_APPLY'" USER="NeoXam" UPDATE_DATE="31/03/2025" UPDATE_TIME="17:38:42" LABEL='Tenant - Mass Override Apply'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_TENANT_MASS_OVR_APPLY&quot;,]"  LOCAL_ID="167797" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_TENANT_MASS_OVR_APPLY",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule is triggered on the Tenant side. Packages for a new version should first be applied. Then, this rule should be triggered to re-apply massively all overrides.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is to be triggered on Tenants only
+if (getTenantCode() = 'CENTRAL') return;
+
+cancelled_status := getListItemId("FT_OVERRIDE_STATUS", "CANCELLED");
+
+try{
+
+//get the overrides
+req := "select COMPOVERRIDE_ID from COMPOVERRIDE where COMPOVERRIDE_STATUS != "+cancelled_status;
+res := getSQLData(req);
+
+//the request will be processed by bulk
+bulkSize:=100;
+nbRead:=0;
+nbSaved:=0;
+  
+while (nbRead < arraysize(res)){
+    
+    nb:=0;
+    if(nbRead+bulkSize > arraysize(res)){
+      bulkSize:=arraysize(res)-nbRead; //mandatory to process correctly the last bulk
+    }
+    
+    //get the IDs that will be processed during that bulk
+    bulk_ids:=array();
+    while (nb<bulkSize){
+      line:=res[nb+nbRead];
+      line_id:=line[0];
+      bulk_ids:=arrayappend(bulk_ids, line_id);
+      nb:=nb+1;
+    }
+    nbRead:=nbRead+nb;
+    
+    //process the bulk
+    objects_to_be_saved := array();
+    for(i:=0; i<arraysize(bulk_ids); i:=i+1){
+      override_id := bulk_ids[i];
+      override := getObject("MxComponentOverride", override_id);
+      config_object := override.applyOverride();
+      config_object.setAuditComment("Override application", 1);
+      objects_to_be_saved := arrayappend(objects_to_be_saved, config_object);
+      }
+
+        
+    saveObjectsImmediately(objects_to_be_saved);
+    nbSaved := nbSaved + arraysize(objects_to_be_saved);
+    if (JOBREPORT != ""){
+      job_report := getObject("MxJobReport", JOBREPORT);
+      job_report_comment := job_report_comment +"\n**********************************************";
+      job_report_comment := job_report_comment +"\n"+nbSaved+" overrides applied";
+      job_report.JOB_COMMENT:=job_report_comment;
+      saveObjectsImmediately(job_report);
+      }
+  }
+    
+} onerror{
+  msg:= error.getMessage();
+  return array("EXIT_1", msg);
+}
+
+return array("EXIT_0", ""+nbSaved+" overrides applied");]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_TENANT_MASS_OVR_APPLY]]></RULE_CODE>
+<RULE_GROUP >WORKFLOW</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170436" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Tenant - Mass Override Apply]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170437" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Tenant - Application massive des sucharges]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;FT_TENANT_MASS_OVR_APPLY&quot;,]"  LOCAL_ID="172588" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[FT_TENANT_MASS_OVR_APPLY]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_TENANT_MASS_OVR_APPLY&quot;,]^CONDITION" VERSION=0>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 167744 v31 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='FT_TENANT_OVR_UPDATED'" USER="NeoXam" UPDATE_DATE="09/04/2025" UPDATE_TIME="17:53:52" LABEL='Tenant - Override Appl (Override Created/Updated)'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;FT_TENANT_OVR_UPDATED&quot;,]"  LOCAL_ID="167744" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","FT_TENANT_OVR_UPDATED",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule is triggered on the Tenant side, when an Override is created or updated. It is applied on the corresponding config object.]]></DESCRIPTION>
+<IMPACT ><![CDATA[//this rule is to be triggered on Tenants only
+if (getTenantCode() = 'CENTRAL') return;
+  
+if (obj.COMPOVERRIDE_STATUS = "TO_BE_CANCELLED"){
+  obj.COMPOVERRIDE_STATUS := "CANCELLED";
+  //rollback of the previous override, in case of update
+  //to be replaced by a proper rollbackOverride() method
+  if (obj.isNewObject() = 0){
+    override_return := FT_OVR_ROLLBACK(obj.id());
+    if (override_return[0] = "EXIT_1"){
+      abort(override_return[1]);
+    }
+  }
+}
+
+else if (obj.COMPOVERRIDE_STATUS = "TO_BE_APPLIED"){
+  obj.COMPOVERRIDE_STATUS := "APPLIED";
+  //rollback of the previous override, in case of update
+  //to be replaced by a proper rollbackOverride() method
+  if (obj.isNewObject() = 0){
+    override_return := FT_OVR_ROLLBACK(obj.id());
+    if (override_return[0] = "EXIT_1"){
+      abort(override_return[1]);
+    }
+  }
+  config_object := obj.applyOverride();
+  config_object.setAuditComment("Override application", 1);
+  obj.join(config_object);
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEDERATED_TENANT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[FT_TENANT_OVR_UPDATED]]></RULE_CODE>
+<RULE_GROUP >WORKFLOW</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="170336" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Tenant - Override Appl (Override Created/Updated)]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="170337" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Tenant - Appl de la sucharge (création/modif de surcharge)]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;12&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="172533" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >12</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;FT_TENANT_OVR_UPDATED&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>COMPOVERRIDE</tablename>
+<classlabel>MxComponentOverride</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxList 160 v113 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTLIST FIND="LIST_CODE='RULE_CATEGORY'" USER="NeoXam" UPDATE_DATE="27/02/2025" UPDATE_TIME="10:24:07" LABEL='Rule - Categories' PARTIAL='1'>
+<T_SMARTLIST CODEFIELDS="LIST_CODE" >
+</T_SMARTLIST>
+<T_SMARTLIST_CATEGORY>
+</T_SMARTLIST_CATEGORY>
+<T_SMARTLIST_ITEM CODEFIELDS="INTERNAL_CODE" >
+<R_SMARTLIST_ITEM CODE=",[&quot;INTERNAL_CODE&quot;,&quot;FEDERATED_TENANT&quot;,]"  LOCAL_ID="719680" >
+<COMMENT_TEXT ></COMMENT_TEXT>
+<FREE1 ></FREE1>
+<FREE2 ></FREE2>
+<FREE3 ></FREE3>
+<FREE4 ></FREE4>
+<ICON_FILENAME ></ICON_FILENAME>
+<INTERNAL_CODE ><![CDATA[FEDERATED_TENANT]]></INTERNAL_CODE>
+<ITEM_ACTIVE >Y</ITEM_ACTIVE>
+<ITEM_PRIVACY_LEVEL >SMARTCO</ITEM_PRIVACY_LEVEL>
+<SORTING ></SORTING>
+</R_SMARTLIST_ITEM>
+</T_SMARTLIST_ITEM>
+<T_SMARTLIST_ITEM_LABEL CODEFIELDS="IL_ITEM_ID^IL_LANGUAGE" >
+<R_SMARTLIST_ITEM_LABEL CODE=",[&quot;IL_ITEM_ID&quot;,&quot;,[&quot;&quot;INTERNAL_CODE&quot;&quot;,&quot;&quot;FEDERATED_TENANT&quot;&quot;,]&quot;,][&quot;IL_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="1482172" >
+<IL_ITEM_ID >,[&quot;INTERNAL_CODE&quot;,&quot;FEDERATED_TENANT&quot;,]</IL_ITEM_ID>
+<IL_LANGUAGE >0</IL_LANGUAGE>
+<ITEM_NAME ><![CDATA[Federated Tenant]]></ITEM_NAME>
+<ITEM_SHORT_NAME ></ITEM_SHORT_NAME>
+</R_SMARTLIST_ITEM_LABEL>
+<R_SMARTLIST_ITEM_LABEL CODE=",[&quot;IL_ITEM_ID&quot;,&quot;,[&quot;&quot;INTERNAL_CODE&quot;&quot;,&quot;&quot;FEDERATED_TENANT&quot;&quot;,]&quot;,][&quot;IL_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="1482173" >
+<IL_ITEM_ID >,[&quot;INTERNAL_CODE&quot;,&quot;FEDERATED_TENANT&quot;,]</IL_ITEM_ID>
+<IL_LANGUAGE >1</IL_LANGUAGE>
+<ITEM_NAME ><![CDATA[Federated Tenant]]></ITEM_NAME>
+<ITEM_SHORT_NAME ></ITEM_SHORT_NAME>
+</R_SMARTLIST_ITEM_LABEL>
+</T_SMARTLIST_ITEM_LABEL>
+<T_SMARTLIST_NAME CODEFIELDS="NAME_LANGUAGE" >
+</T_SMARTLIST_NAME>
+
+</SMARTLIST>
+</RESULT>
+
+</BODY>

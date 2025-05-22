@@ -1,0 +1,1633 @@
+<?xml version='1.0' encoding="windows-1252" ?>
+<HEAD>
+<PACKAGE>DHRD-101738_MANDATORY_02_NEW_DQC_SCREENS_7.1-00</PACKAGE>
+<NAME>DHRD-101738_MANDATORY_02_NEW_DQC_SCREENS_7.1-00</NAME>
+<BUILD_DATE>20241213</BUILD_DATE>
+<LEVEL>MANDATORY</LEVEL>
+<ORIGIN></ORIGIN>
+<RELEASE>7.1.0.0</RELEASE>
+<CREATOR>BAMS\robert.fleiser</CREATOR>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+</HEAD>
+
+<BODY>
+<!--   Package created by Robert Fleiser -->
+<!--      creation date: 12/13/2024 17:24:29 -->
+<!--      creation version: null -->
+<!--      source environment: //vm-nxdh-pack-prd1:8100/SmartServer; updated screens: _SUM_DATA_CONTROLS_D, _COMP_BLOCK, CONTROL_CLAUSE_DATA_D -->
+
+<!--MxUser 379 v3593 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTUSER FIND="NAME='rdata'" USER="lf.guimaraes" UPDATE_DATE="10/01/2025" UPDATE_TIME="11:03:14" LABEL='Data Repository' PARTIAL='1'>
+<T_SMARTUSER CODEFIELDS="NAME" >
+</T_SMARTUSER>
+<T_SMARTUSER_AUTHENTIFICATION>
+</T_SMARTUSER_AUTHENTIFICATION>
+<T_SMARTUSER_AUTHORIZATION>
+</T_SMARTUSER_AUTHORIZATION>
+<T_SMARTUSER_CLASSIFICATION>
+</T_SMARTUSER_CLASSIFICATION>
+<T_SMARTUSER_CODE CODEFIELDS="USER_CODE_TYPE" >
+</T_SMARTUSER_CODE>
+<T_SMARTUSER_EMAIL>
+</T_SMARTUSER_EMAIL>
+<T_SMARTUSER_INHERITANCE CODEFIELDS="INHERITED_USER^INHERITED_CATEGORY" >
+</T_SMARTUSER_INHERITANCE>
+<T_SMARTUSER_LINK>
+</T_SMARTUSER_LINK>
+<T_SMARTUSER_MENU_NODE CODEFIELDS="M_NODE_CODE" >
+</T_SMARTUSER_MENU_NODE>
+<T_SMARTUSER_NAVCONFIG>
+</T_SMARTUSER_NAVCONFIG>
+<T_SMARTUSER_PERSONAL_INFO>
+</T_SMARTUSER_PERSONAL_INFO>
+<T_SMARTUSER_PREFERENCE>
+</T_SMARTUSER_PREFERENCE>
+<T_SMARTUSER_SHORTCUT>
+</T_SMARTUSER_SHORTCUT>
+<T_SMARTUSER_SYS_PREFERENCE CODEFIELDS="SYSPREF_NAME" >
+</T_SMARTUSER_SYS_PREFERENCE>
+<T_SMARTUSER_WINDOW CODEFIELDS="WINDOW_CODE" >
+<R_SMARTUSER_WINDOW CODE=",[&quot;WINDOW_CODE&quot;,&quot;_COMP_BLOCK&quot;,]"  LOCAL_ID="167545" >
+<WINDOW_CODE ><![CDATA[_COMP_BLOCK]]></WINDOW_CODE>
+<WINDOW_CONFIG ><![CDATA[$,["WINDOW_CODE","_COMP_BLOCK",]^WINDOW_CONFIG]]></WINDOW_CONFIG>
+<WINDOW_HEIGHT >45</WINDOW_HEIGHT>
+<WINDOW_ICON ></WINDOW_ICON>
+<WINDOW_NAME ><![CDATA[Clause]]></WINDOW_NAME>
+<WINDOW_NAME_TRANSLATIONS ><![CDATA[0::Clause;;1::;;2::;;3::;;4::;;5::;;6::]]></WINDOW_NAME_TRANSLATIONS>
+<WINDOW_NODE >,[&quot;M_NODE_CODE&quot;,&quot;Data repository_..._6&quot;,]</WINDOW_NODE>
+<WINDOW_PRIVACY_LEVEL ></WINDOW_PRIVACY_LEVEL>
+<WINDOW_REF ></WINDOW_REF>
+<WINDOW_SCOPEVIEW ></WINDOW_SCOPEVIEW>
+<WINDOW_TYPE ><![CDATA[Detail]]></WINDOW_TYPE>
+<WINDOW_WIDTH >123</WINDOW_WIDTH>
+<WINDOW_X >20</WINDOW_X>
+<WINDOW_Y >20</WINDOW_Y>
+</R_SMARTUSER_WINDOW>
+<R_SMARTUSER_WINDOW CODE=",[&quot;WINDOW_CODE&quot;,&quot;_SUM_DATA_CONTROLS_D&quot;,]"  LOCAL_ID="167547" >
+<WINDOW_CODE ><![CDATA[_SUM_DATA_CONTROLS_D]]></WINDOW_CODE>
+<WINDOW_CONFIG ><![CDATA[$,["WINDOW_CODE","_SUM_DATA_CONTROLS_D",]^WINDOW_CONFIG]]></WINDOW_CONFIG>
+<WINDOW_HEIGHT >45</WINDOW_HEIGHT>
+<WINDOW_ICON >Quality control</WINDOW_ICON>
+<WINDOW_NAME ><![CDATA[Summary Control Detail]]></WINDOW_NAME>
+<WINDOW_NAME_TRANSLATIONS ><![CDATA[0::Summary Control Detail;;1::;;2::;;3::;;4::;;5::;;6::]]></WINDOW_NAME_TRANSLATIONS>
+<WINDOW_NODE >,[&quot;M_NODE_CODE&quot;,&quot;Data repository_..._6&quot;,]</WINDOW_NODE>
+<WINDOW_PRIVACY_LEVEL ></WINDOW_PRIVACY_LEVEL>
+<WINDOW_REF ></WINDOW_REF>
+<WINDOW_SCOPEVIEW ></WINDOW_SCOPEVIEW>
+<WINDOW_TYPE ><![CDATA[Detail]]></WINDOW_TYPE>
+<WINDOW_WIDTH >119</WINDOW_WIDTH>
+<WINDOW_X >20</WINDOW_X>
+<WINDOW_Y >20</WINDOW_Y>
+</R_SMARTUSER_WINDOW>
+<R_SMARTUSER_WINDOW CODE=",[&quot;WINDOW_CODE&quot;,&quot;CONTROL_CLAUSE_DATA_D&quot;,]"  LOCAL_ID="167543" >
+<WINDOW_CODE ><![CDATA[CONTROL_CLAUSE_DATA_D]]></WINDOW_CODE>
+<WINDOW_CONFIG ><![CDATA[$,["WINDOW_CODE","CONTROL_CLAUSE_DATA_D",]^WINDOW_CONFIG]]></WINDOW_CONFIG>
+<WINDOW_HEIGHT >45</WINDOW_HEIGHT>
+<WINDOW_ICON >Quality control</WINDOW_ICON>
+<WINDOW_NAME ><![CDATA[Control Clause Data Detail]]></WINDOW_NAME>
+<WINDOW_NAME_TRANSLATIONS ><![CDATA[0::Control Clause Data Detail;;1::;;2::;;3::;;4::;;5::;;6::]]></WINDOW_NAME_TRANSLATIONS>
+<WINDOW_NODE >,[&quot;M_NODE_CODE&quot;,&quot;Data repository_..._6&quot;,]</WINDOW_NODE>
+<WINDOW_PRIVACY_LEVEL ></WINDOW_PRIVACY_LEVEL>
+<WINDOW_REF ></WINDOW_REF>
+<WINDOW_SCOPEVIEW ></WINDOW_SCOPEVIEW>
+<WINDOW_TYPE ><![CDATA[Detail]]></WINDOW_TYPE>
+<WINDOW_WIDTH >119</WINDOW_WIDTH>
+<WINDOW_X >20</WINDOW_X>
+<WINDOW_Y >20</WINDOW_Y>
+</R_SMARTUSER_WINDOW>
+</T_SMARTUSER_WINDOW>
+
+<RF CLASS="DetailConfig" CODE="$,[&quot;WINDOW_CODE&quot;,&quot;_COMP_BLOCK&quot;,]^WINDOW_CONFIG" VERSION=0>
+<BANNERCOLOR>-14526837</BANNERCOLOR>
+<BANNERTEXTCOLOR>-1</BANNERTEXTCOLOR>
+<bannertext><![CDATA[ ]]></bannertext>
+<RF CLASS="componenttree">
+<name>Form</name>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Comparison Details</name>
+<layout>BoxLayout</layout>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Comparison</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Comparison Details</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Assessed Data</name>
+<layout>BoxLayout</layout>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Assessed Data</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Type</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Type</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>1</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<COMPOPER>4</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<ISVECTOR>1</ISVECTOR>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[BUSINESSF]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[VALUE]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Type</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Type</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>BUSINESS_FIELD</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>1</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[BUSINESSF]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Type</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Type</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>DATA_FORMAT</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>DATA_VALUE</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>1</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[VALUE]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Control</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Control</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>CONTROL_TYPE</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GridNode">
+<CLASSNUM>1</CLASSNUM>
+<basetable>CONTROLCLAUSEDATA_PARAMETER</basetable>
+<RF CLASS="selectedfields">
+<RF CLASS="gridconfig">
+<TREELNF>0</TREELNF>
+<RF CLASS="columns">
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<WIDTH>312</WIDTH>
+<DISPLAY>1</DISPLAY>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>1</INDEX>
+<WIDTH>312</WIDTH>
+<DISPLAY>1</DISPLAY>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+</RF>
+<RF CLASS="sortindex">
+</RF>
+<RF CLASS="sortasc">
+</RF>
+<RF CLASS="cc">
+</RF>
+</RF>
+<RF CLASS="list">
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>CONTROL_TYPE_PARAMETER</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>PARAMETER_VALUE</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="cond">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<classlabel>MxControlClauseData</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>ACTIVE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<fieldlabel><![CDATA[ACTIVE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[Y]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>1</CLASSNUM>
+<fieldname>CONTROL_TYPE</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[CONTROL_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[[CODE='CTRL_VALUE_OF']]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Control</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Control</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>1</CLASSNUM>
+<fieldname>CONTROL_TYPE</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>1</CLASSNUM>
+<fieldname>CONTROL_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[CONTROL_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[[CODE='CTRL_VALUE_OF']]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Operator</name>
+<layout>BoxLayout</layout>
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Operator</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Operator</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Operator Selection</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Operator Selection</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>CLAUSE_OPERATOR</fieldname>
+<userlabel><![CDATA[ ]]></userlabel>
+<userComment><![CDATA[Indicates the operator to apply between assessed data and target data part of a clause]]></userComment>
+<RF CLASS="userLabelLanguages">
+</RF>
+<RF CLASS="userCommentTranslations">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Indicates the operator to apply between assessed data and target data part of a clause</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Target Data</name>
+<layout>BoxLayout</layout>
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Target Data</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Data</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>2</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<COMPOPER>4</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<ISVECTOR>1</ISVECTOR>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[BUSINESSF]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[VALUE]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Data</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>BUSINESS_FIELD</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>2</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[BUSINESSF]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Data</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>DATA_FORMAT</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>DATA_VALUE</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>2</CLASSNUM>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[VALUE]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Control</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Control</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>CONTROL_TYPE</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GridNode">
+<CLASSNUM>2</CLASSNUM>
+<basetable>CONTROLCLAUSEDATA_PARAMETER</basetable>
+<RF CLASS="selectedfields">
+<RF CLASS="gridconfig">
+<TREELNF>0</TREELNF>
+<RF CLASS="columns">
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<WIDTH>312</WIDTH>
+<DISPLAY>1</DISPLAY>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>1</INDEX>
+<WIDTH>312</WIDTH>
+<DISPLAY>1</DISPLAY>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+</RF>
+<RF CLASS="sortindex">
+</RF>
+<RF CLASS="sortasc">
+</RF>
+<RF CLASS="cc">
+</RF>
+</RF>
+<RF CLASS="list">
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>CONTROL_TYPE_PARAMETER</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>PARAMETER_VALUE</fieldname>
+<RF CLASS="userLabelLanguages">
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="cond">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<classlabel>MxControlClauseData</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>ACTIVE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<fieldlabel><![CDATA[ACTIVE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[Y]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>2</CLASSNUM>
+<fieldname>CONTROL_TYPE</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[CONTROL_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[[CODE='CTRL_VALUE_OF']]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Control</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Control</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<CLASSNUM>2</CLASSNUM>
+<fieldname>CONTROL_TYPE</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<CLASSNUM>2</CLASSNUM>
+<fieldname>CONTROL_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[CONTROL_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[[CODE='CTRL_VALUE_OF']]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>CLAUSE_OPERATOR</fieldname>
+<COMPOPER>4</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[CLAUSE_OPERATOR]]></fieldlabel>
+<ISVECTOR>1</ISVECTOR>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[NOTNULL]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[NULL]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="sortingfield">
+</RF>
+<RF CLASS="bannerfield">
+<fieldname>NAME</fieldname>
+<RF CLASS="recspec">
+<fd><![CDATA[NAME]]></fd>
+<RF CLASS="thisrespec">
+<RF CLASS="lib.system.objects.Condition$RecSpec$Element">
+<fieldname>LANGUAGE</fieldname>
+<VALUETYPE>3</VALUETYPE>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>ASSESSED_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>ASSESSED_DATA</baseclassfieldlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<baseclassfield>TARGET_DATA</baseclassfield>
+<classlabel>MxControlClauseData</classlabel>
+<baseclassfieldlabel>TARGET_DATA</baseclassfieldlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>CODE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[CODE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[ERROR]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="DetailConfig" CODE="$,[&quot;WINDOW_CODE&quot;,&quot;_SUM_DATA_CONTROLS_D&quot;,]^WINDOW_CONFIG" VERSION=0>
+<BANNERCOLOR>-14526837</BANNERCOLOR>
+<BANNERTEXTCOLOR>-1</BANNERTEXTCOLOR>
+<bannertext><![CDATA[Control Details: ]]></bannertext>
+<category>DQC_GROUP</category>
+<RF CLASS="componenttree">
+<name>Form</name>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Definition</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Definition</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Identification</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Identification</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>NAME</fieldname>
+<userlabel><![CDATA[Name(en)]]></userlabel>
+<userComment><![CDATA[]]></userComment>
+<DISPLAYMODEREFERENCE>-1</DISPLAYMODEREFERENCE>
+<RF CLASS="recspec">
+<fd><![CDATA[NAME]]></fd>
+<RF CLASS="thisrespec">
+<RF CLASS="lib.system.objects.Condition$RecSpec$Element">
+<fieldname>LANGUAGE</fieldname>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[0]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Name(en)</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="desc">
+<fieldname>ACTIVE</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>QUALITY_LEVEL</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="desc">
+<fieldname>QUALITY_INDICATOR</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<layoutconstraint>H=50</layoutconstraint>
+<RF CLASS="desc">
+<fieldname>CONTROL_COMMENT</fieldname>
+<userlabel><![CDATA[Comment]]></userlabel>
+<userComment><![CDATA[]]></userComment>
+<DISPLAYMODEREFERENCE>-1</DISPLAYMODEREFERENCE>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Comment</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Applicability/Groups</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Applicability/Groups</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Applicability/Groups</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>APPLICABILITY</fieldname>
+<ISEDITABLE>0</ISEDITABLE>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="desc">
+<fieldname>BUSINESS_CLASS</fieldname>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data Check Clauses</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Data Check Clauses</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GridNode">
+<basetable>DATACONTROL_CLAUSES</basetable>
+<RF CLASS="selectedfields">
+<RF CLASS="gridconfig">
+<DISPLAYCOLUMNMODIFICATION>0</DISPLAYCOLUMNMODIFICATION>
+<TREELNF>0</TREELNF>
+<SORTNB>1</SORTNB>
+<RF CLASS="columns">
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<WIDTH>47</WIDTH>
+<ISEDITABLE>1</ISEDITABLE>
+<RF CLASS="format">
+<patternTypeValInt>0</patternTypeValInt>
+<RF CLASS="patternString">
+</RF>
+<RF CLASS="decimalGroupSeparator">
+</RF>
+<RF CLASS="decimalSeparator">
+</RF>
+<RF CLASS="defaultformat">
+<FONT_WEIGHT>1</FONT_WEIGHT>
+<foreground>-16777216</foreground>
+<background>-1</background>
+<TRANSPARENCY>1</TRANSPARENCY>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>1</INDEX>
+<WIDTH>47</WIDTH>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>2</INDEX>
+<WIDTH>411</WIDTH>
+<DISPLAY>1</DISPLAY>
+<RF CLASS="format">
+<patternTypeValInt>0</patternTypeValInt>
+<RF CLASS="patternString">
+</RF>
+<RF CLASS="decimalGroupSeparator">
+</RF>
+<RF CLASS="decimalSeparator">
+</RF>
+<RF CLASS="defaultformat">
+<ALIGNMENT>2</ALIGNMENT>
+<FONT_WEIGHT>1</FONT_WEIGHT>
+<foreground>-16777216</foreground>
+<background>-1</background>
+<TRANSPARENCY>1</TRANSPARENCY>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>3</INDEX>
+<WIDTH>47</WIDTH>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>4</INDEX>
+<WIDTH>47</WIDTH>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>5</INDEX>
+<WIDTH>250</WIDTH>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>6</INDEX>
+<WIDTH>250</WIDTH>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+<RF CLASS="lib.common.client.GridConfig$ColumnConfig">
+<INDEX>7</INDEX>
+<WIDTH>160</WIDTH>
+<ISEDITABLE>1</ISEDITABLE>
+</RF>
+</RF>
+<RF CLASS="sortindex">
+<int>0</int>
+</RF>
+<RF CLASS="sortasc">
+</RF>
+<RF CLASS="cc">
+</RF>
+</RF>
+<RF CLASS="list">
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>EVALUATE_ORDER</fieldname>
+<DISPLAY>0</DISPLAY>
+<userlabel><![CDATA[#]]></userlabel>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>#</java.lang.String>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>PARENTHESIS_OPEN</fieldname>
+<DISPLAY>0</DISPLAY>
+<userlabel><![CDATA[(]]></userlabel>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>(</java.lang.String>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>LABEL</fieldname>
+<ISEDITABLE>0</ISEDITABLE>
+<userlabel><![CDATA[Clause]]></userlabel>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Clause</java.lang.String>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>PARENTHESIS_CLOSE</fieldname>
+<DISPLAY>0</DISPLAY>
+<userlabel><![CDATA[)]]></userlabel>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>)</java.lang.String>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>PARENTHESIS_OPERATOR</fieldname>
+<DISPLAY>0</DISPLAY>
+<userlabel><![CDATA[Group Operator]]></userlabel>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Group Operator</java.lang.String>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>ASSESSED_DATA</fieldname>
+<DISPLAY>0</DISPLAY>
+<ISEDITABLE>0</ISEDITABLE>
+<DISPLAYMODEREFERENCE>2</DISPLAYMODEREFERENCE>
+<RF CLASS="userLabelLanguages">
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>TARGET_DATA</fieldname>
+<DISPLAY>0</DISPLAY>
+<ISEDITABLE>0</ISEDITABLE>
+<DISPLAYMODEREFERENCE>2</DISPLAYMODEREFERENCE>
+<RF CLASS="userLabelLanguages">
+</RF>
+</RF>
+<RF CLASS="lib.system.objects.Condition$FieldDesc">
+<fieldname>CLAUSE_OPERATOR</fieldname>
+<DISPLAY>0</DISPLAY>
+<RF CLASS="userLabelLanguages">
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="cond">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="sortingfield">
+</RF>
+<RF CLASS="bannerfield">
+<fieldname>NAME</fieldname>
+<RF CLASS="recspec">
+<fd><![CDATA[NAME]]></fd>
+<RF CLASS="thisrespec">
+<RF CLASS="lib.system.objects.Condition$RecSpec$Element">
+<fieldname>LANGUAGE</fieldname>
+<VALUETYPE>3</VALUETYPE>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLEXECRULE</tablename>
+<baseclassfield>DATACONTROL_ID</baseclassfield>
+<linkclassfield>CONTROL</linkclassfield>
+<classlabel>MxControlExecutionRule</classlabel>
+<baseclassfieldlabel>DATACONTROL_ID</baseclassfieldlabel>
+</RF>
+</RF>
+</RF>
+<RF CLASS="DetailConfig" CODE="$,[&quot;WINDOW_CODE&quot;,&quot;CONTROL_CLAUSE_DATA_D&quot;,]^WINDOW_CONFIG" VERSION=0>
+<BANNERCOLOR>-14526837</BANNERCOLOR>
+<BANNERTEXTCOLOR>-1</BANNERTEXTCOLOR>
+<bannertext><![CDATA[Control Clause Detail]]></bannertext>
+<RF CLASS="componenttree">
+<name>Form</name>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Clause Data</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Clause Data</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Identification</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Identification</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>NAME</fieldname>
+<userlabel><![CDATA[Name(en)]]></userlabel>
+<userComment><![CDATA[]]></userComment>
+<DISPLAYMODEREFERENCE>-1</DISPLAYMODEREFERENCE>
+<RF CLASS="recspec">
+<fd><![CDATA[NAME]]></fd>
+<RF CLASS="thisrespec">
+<RF CLASS="lib.system.objects.Condition$RecSpec$Element">
+<fieldname>LANGUAGE</fieldname>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[0]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Name(en)</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="desc">
+<fieldname>NAME</fieldname>
+<userlabel><![CDATA[Name(fr)]]></userlabel>
+<userComment><![CDATA[]]></userComment>
+<DISPLAYMODEREFERENCE>-1</DISPLAYMODEREFERENCE>
+<RF CLASS="recspec">
+<fd><![CDATA[NAME]]></fd>
+<RF CLASS="thisrespec">
+<RF CLASS="lib.system.objects.Condition$RecSpec$Element">
+<fieldname>LANGUAGE</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Name(fr)</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="userCommentTranslations">
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="desc">
+<fieldname>CODE</fieldname>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data source</name>
+<layout>BoxLayout</layout>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Data source</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data type</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Data type</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data type details</name>
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Data type details</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>BUSINESS_CLASS</fieldname>
+<ISEDITABLE>0</ISEDITABLE>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>BUSINESS_FIELD</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<classlabel>MxControlClauseData</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[BUSINESSF]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data type details</name>
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Data type details</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>DATA_FORMAT</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>DATA_VALUE</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<classlabel>MxControlClauseData</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[VALUE]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Data type details</name>
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Data type details</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>TARGET_CLASS</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="desc">
+<fieldname>DATA_TABLE</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>TECHNICAL_FIELD</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<HLAYOUT>1</HLAYOUT>
+<RF CLASS="desc">
+<fieldname>REC_SPEC</fieldname>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>PROVIDER</fieldname>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<classlabel>MxControlClauseData</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[TECHNICALF]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Datat type details</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Datat type details</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>SCRIPT</fieldname>
+<userlabel><![CDATA[Datat type details]]></userlabel>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Datat type details</java.lang.String>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="visibleCondition">
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<classlabel>MxControlClauseData</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>DATA_SOURCE_TYPE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATA_SOURCE_TYPE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[SCRIPT]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Control</name>
+<layout>BoxLayout</layout>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Control</java.lang.String>
+</RF>
+<RF CLASS="java.util.ArrayList">
+<java.lang.Integer>0</java.lang.Integer>
+<java.lang.String>Control</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$GroupNode">
+<name>Control type</name>
+<RF CLASS="userLabelLanguages">
+<RF CLASS="java.util.ArrayList">
+<java.lang.Long>0</java.lang.Long>
+<java.lang.String>Control type</java.lang.String>
+</RF>
+</RF>
+<RF CLASS="children">
+<RF CLASS="lib.clientui.detail.DetailConfig$FieldNode">
+<RF CLASS="desc">
+<fieldname>CONTROL_TYPE</fieldname>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+</RF>
+<RF CLASS="sortingfield">
+</RF>
+<RF CLASS="bannerfield">
+</RF>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>CONTROLCLAUSEDATA</tablename>
+<classlabel>MxControlClauseData</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTUSER>
+</RESULT>
+
+</BODY>

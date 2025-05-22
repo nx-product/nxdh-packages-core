@@ -1,0 +1,1021 @@
+<?xml version='1.0' encoding="windows-1252" ?>
+<HEAD>
+<PACKAGE>DHRD-101738_MANDATORY_01_NEW_DQC_BUSINESSRULES_7.1-00</PACKAGE>
+<NAME>DHRD-101738_MANDATORY_01_NEW_DQC_BUSINESSRULES_7.1-00</NAME>
+<BUILD_DATE>20241213</BUILD_DATE>
+<LEVEL>MANDATORY</LEVEL>
+<ORIGIN></ORIGIN>
+<RELEASE>7.1.0.0</RELEASE>
+<CREATOR>BAMS\robert.fleiser</CREATOR>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+</HEAD>
+
+<BODY>
+<!--   Package created by Robert Fleiser -->
+<!--      creation date: 12/13/2024 11:59:11 -->
+<!--      creation version: null -->
+<!--      source environment: //vm-nxdh-pack-prd1:8100/SmartServer -->
+
+<!--MxRule 166236 v10 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='UPDATE_CLAUSES_ORDER'" USER="lf.guimaraes" UPDATE_DATE="05/12/2024" UPDATE_TIME="09:36:50" LABEL='Update Clauses Order'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;UPDATE_CLAUSES_ORDER&quot;,]"  LOCAL_ID="166236" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","UPDATE_CLAUSES_ORDER",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[//obj := getObject("MxDataControl",13)
+
+resTab := array()
+found := obj.first("DATACONTROL_CLAUSES")
+
+while (found>0) {
+  record := array(obj.EVALUATE_ORDER, obj.DATACONTROL_CLAUSES_ID)
+  resTab := arrayappend(resTab, record)
+  found := obj.next("DATACONTROL_CLAUSES")
+}
+
+resTab := arraysort(resTab)
+index := 0
+
+foreach res in resTab do {
+  resID := res[1]
+  obj.EVALUATE_ORDER[DATACONTROL_CLAUSES_ID=resID] := index
+  index := index + 1
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[UPDATE_CLAUSES_ORDER]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168805" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Update Clauses Order]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;12&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171034" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >12</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;UPDATE_CLAUSES_ORDER&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166215 v8 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='DQC_AGENT'" USER="lf.guimaraes" UPDATE_DATE="06/11/2024" UPDATE_TIME="11:45:33" LABEL='Quality Screening - Business Entities'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;DQC_AGENT&quot;,]"  LOCAL_ID="166215" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","DQC_AGENT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule is an action button to add in UI and trigger control execution linked to the Agent]]></DESCRIPTION>
+<IMPACT ><![CDATA[foreach object in objects do {
+  object.executeBusinessQualityRules()
+}
+
+userinfo("Quality Check triggered with success! All data issues can be found on the exceptions dashboard.")]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[DQC_AGENT]]></RULE_CODE>
+<RULE_GROUP >TOOL</RULE_GROUP>
+<RULE_STATUS >DEMO</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MULTI</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168774" >
+<CONTEXT_ACCESS_NAME ><![CDATA[Quality Screening]]></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Quality Screening - Business Entities]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168775" >
+<CONTEXT_ACCESS_NAME ><![CDATA[Quality Screening]]></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Quality Screening - Business Entities]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171005" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;DQC_AGENT&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>AGENT</tablename>
+<classlabel>MxAgent</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166216 v16 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='DQC_SECURITY'" USER="lf.guimaraes" UPDATE_DATE="06/11/2024" UPDATE_TIME="11:45:31" LABEL='Quality Screening - Equities'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;DQC_SECURITY&quot;,]"  LOCAL_ID="166216" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","DQC_SECURITY",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule is an action button to add in UI and trigger control execution linked to the Security]]></DESCRIPTION>
+<IMPACT ><![CDATA[/*objIds := array()
+classID := 
+
+foreach object in objects do {
+  classID := object.classId()
+  objectID := object.id()
+  arrayappend(objIds, array(classID, objectID))  
+}
+
+putInCache("OBJECTS_DQC", objIds, "JOB");
+
+tasks:=getObjects("MxScheduledTask", "TASK_CODE='RUN_QUALITY_CHECK'");
+task := tasks[0];
+
+para := array(array("OBJECTS", objIds))
+task.immediateRequest(para);*/
+
+foreach object in objects do {
+  res := object.executeBusinessQualityRules()
+}
+userinfo("Quality Check triggered with success! All data issues can be found on the exceptions dashboard.")]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[DQC_SECURITY]]></RULE_CODE>
+<RULE_GROUP >TOOL</RULE_GROUP>
+<RULE_STATUS >DEMO</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MULTI</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168776" >
+<CONTEXT_ACCESS_NAME ><![CDATA[Quality Screening]]></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Quality Screening - Equities]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168777" >
+<CONTEXT_ACCESS_NAME ><![CDATA[Quality Screening]]></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Quality Screening - Equities]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171006" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;DQC_SECURITY&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>SECURITY</tablename>
+<classlabel>MxSecurity</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166228 v20 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='RUN_QUALITY_CHECK'" USER="lf.guimaraes" UPDATE_DATE="16/10/2024" UPDATE_TIME="15:07:04" LABEL='Run Quality Check'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;RUN_QUALITY_CHECK&quot;,]"  LOCAL_ID="166228" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","RUN_QUALITY_CHECK",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule is an action button to add in UI and trigger control execution linked to the Agent]]></DESCRIPTION>
+<IMPACT ><![CDATA[objIds := arg1
+objClass := arg2
+class := getObject("MxClassDef", objClass)
+
+objIds := strreplace(objIds,"[","")
+objIds := strreplace(objIds,"]","")
+objIds := strtokenize(objIds,", ")
+
+foreach objId in objIds do {
+  object := getObject(class.CLASS_NAME, objId)
+  object.executeBusinessQualityRules();
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[RUN_QUALITY_CHECK]]></RULE_CODE>
+<RULE_GROUP >TOOL</RULE_GROUP>
+<RULE_STATUS >DEMO</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168791" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Run Quality Check]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168792" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Run Quality Check]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;RUN_QUALITY_CHECK&quot;,]"  LOCAL_ID="171024" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[RUN_QUALITY_CHECK]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;RUN_QUALITY_CHECK&quot;,]^CONDITION" VERSION=0>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 370 v34 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='AUDIT_OPEN_OBJECT'" USER="lf.guimaraes" UPDATE_DATE="14/10/2024" UPDATE_TIME="16:51:35" LABEL='See object'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;AUDIT_OPEN_OBJECT&quot;,]"  LOCAL_ID="370" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","AUDIT_OPEN_OBJECT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[if(obj1.CLASS_ID = "" or obj1.OBJECT_ID = "") return;
+
+class := getobject("MxClassDef", obj1.CLASS_ID);
+object := getobject(class.CLASS_NAME, obj1.OBJECT_ID);
+showObjectDetailWindow(object);]]></IMPACT>
+<PRIVACY_LEVEL >DATAADMIN</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >FEEDREJECT</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[AUDIT_OPEN_OBJECT]]></RULE_CODE>
+<RULE_GROUP >INVESTIGATION</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ><![CDATA[From an alert, this action allows displaying the detail of the related entity (security, third party, corporate action, ....)
+
+User's action.]]></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="704" >
+<CONTEXT_ACCESS_NAME ><![CDATA[-]]></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ><![CDATA[-]]></MENU_ACCESS_NAME>
+<NAME ><![CDATA[See object]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="705" >
+<CONTEXT_ACCESS_NAME ><![CDATA[-]]></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ><![CDATA[-]]></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Voir l'objet]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="486" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;AUDIT_OPEN_OBJECT&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>FEEDREJECT</tablename>
+<BASECLASSNUM>-1</BASECLASSNUM>
+<classlabel>MxFeedReject</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>OBJECT_ID</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[OBJECT_ID]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166224 v165 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='ADD_DUP_COMPARISON'" USER="lf.guimaraes" UPDATE_DATE="09/01/2025" UPDATE_TIME="15:10:24" LABEL='Add/Duplicate Comparison'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;ADD_DUP_COMPARISON&quot;,]"  LOCAL_ID="166224" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","ADD_DUP_COMPARISON",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[if(isInteractive()=0) return;
+
+if(obj.isNewObject()){
+  userinfo("Please save control before adding clauses!")
+  obj.remove("DATACONTROL_CLAUSES")
+  return;
+}
+
+obj.EVALUATE_ORDER := obj.count("DATACONTROL_CLAUSES")+1
+
+temp := createObject("MxDataControl")
+
+duplicatedAssessed := obj.ASSESSED_DATA
+duplicatedOperator := obj.CLAUSE_OPERATOR
+duplicatedTarget := obj.TARGET_DATA
+
+assessed := CREATE_CLAUSE(duplicatedAssessed, "Assessed", obj)
+target := CREATE_CLAUSE(duplicatedTarget, "Target", obj)
+if(duplicatedOperator!="")operator := duplicatedOperator
+else operator := "EQUAL"
+
+temp.ASSESSED_DATA := assessed
+temp.TARGET_DATA := target
+temp.CLAUSE_OPERATOR := operator
+
+res := showObjectDetailDialog("_COMP_BLOCK",temp, 900, 400)
+
+if(res = 1){
+  obj.ASSESSED_DATA:=assessed
+  obj.CLAUSE_OPERATOR:=temp.CLAUSE_OPERATOR
+  if(getListItemCode("DATACONTROL_CLAUSE_OPERATORS", obj.CLAUSE_OPERATOR, 2)!=1)obj.TARGET_DATA:=target
+  else obj.TARGET_DATA:=""
+  obj.PARENTHESIS_CLOSE:=")"
+  obj.PARENTHESIS_OPEN:="("
+  obj.PARENTHESIS_OPERATOR:="OR"
+}else{
+    if (obj.isNewRecord("DATACONTROL_CLAUSES"))obj.remove("DATACONTROL_CLAUSES")
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[ADD_DUP_COMPARISON]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168788" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Add/Duplicate Comparison]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;20&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;DATACONTROL_CLAUSES&quot;,]"  LOCAL_ID="171020" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[DATACONTROL_CLAUSES]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >20</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;ADD_DUP_COMPARISON&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>BUSINESS_CLASS</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[BUSINESS_CLASS]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166227 v17 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='REMOVE_COMPARISON_AUTO'" USER="lf.guimaraes" UPDATE_DATE="09/01/2025" UPDATE_TIME="11:20:36" LABEL='Remove Comparison'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;REMOVE_COMPARISON_AUTO&quot;,]"  LOCAL_ID="166227" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","REMOVE_COMPARISON_AUTO",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[clauseID := obj.DATACONTROL_CLAUSES_ID
+if(strsearch(clauseID, "-")="-1" and obj.EVALUATE_ORDER >-1){
+obj := getObject("MxDataControl", obj.id())
+res := useryesno("This action will remove selected row and can't be reverted. You want to continue?")
+if(res = 1){
+  //rejects := getObjects("MxFeedReject", 'CONTROL_CLAUSE="'+clauseID+'"')
+  req := "select f.FEEDREJECT_ID from FEEDREJECT f where f.CONTROL_CLAUSE = "+clauseID;
+  res := getData(req);
+
+  foreach feedRejectId in res{
+    temp := getObject("MxFeedReject", feedRejectId[0])
+    temp.CONTROL_CLAUSE := ""
+    saveObjectsImmediately(temp)
+  }
+
+  obj.findRecord("DATACONTROL_CLAUSES_ID",clauseID)
+  obj.EVALUATE_ORDER := -1
+  obj.remove("DATACONTROL_CLAUSES")
+}
+
+saveObjectsImmediately(obj)
+refreshScreen()
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[REMOVE_COMPARISON_AUTO]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168790" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Remove Comparison]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;21&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;DATACONTROL_CLAUSES&quot;,]"  LOCAL_ID="171023" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[DATACONTROL_CLAUSES]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >21</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;REMOVE_COMPARISON_AUTO&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>DATACONTROL_CLAUSES_ID</fieldname>
+<COMPOPER>7</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[DATACONTROL_CLAUSES_ID]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[0]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166225 v11 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='CREATE_CLAUSE'" USER="lf.guimaraes" UPDATE_DATE="10/10/2024" UPDATE_TIME="18:52:57" LABEL='Create Clause'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;CREATE_CLAUSE&quot;,]"  LOCAL_ID="166225" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","CREATE_CLAUSE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[sourceClause := arg1
+clauseSide := arg2
+obj := arg3
+
+clause:= createObject("MxControlClauseData")
+clause.create("CONTROLCLAUSEDATA_NAME")
+clause.NAME:=clauseSide
+clause.LANGUAGE:="0"
+clause.BUSINESS_CLASS := obj.BUSINESS_CLASS
+clause.PROVIDER := "REFERENCE"
+clause.CODE:= clause.NAME+"_"+now()
+
+if(sourceClause!=""){
+  sourceClause := getObject("MxControlClauseData", sourceClause)
+  clause.NAME:=sourceClause.NAME
+  clause.LANGUAGE:=sourceClause.LANGUAGE
+  clause.BUSINESS_CLASS := sourceClause.BUSINESS_CLASS
+  clause.PROVIDER := sourceClause.PROVIDER
+  clause.BUSINESS_FIELD :=  sourceClause.BUSINESS_FIELD
+  clause.CONTROL_TYPE :=  sourceClause.CONTROL_TYPE
+  clause.DATA_SOURCE_TYPE :=  sourceClause.DATA_SOURCE_TYPE
+  clause.DATA_FORMAT :=  sourceClause.DATA_FORMAT
+  clause.LABEL :=  sourceClause.LABEL
+  clause.DATA_VALUE :=  sourceClause.DATA_VALUE
+}
+
+return clause;]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[CREATE_CLAUSE]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168789" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Create Clause]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;CREATE_CLAUSE&quot;,]"  LOCAL_ID="171021" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[CREATE_CLAUSE]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;CREATE_CLAUSE&quot;,]^CONDITION" VERSION=0>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166218 v4 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='REMOVE_COMPARISON'" USER="lf.guimaraes" UPDATE_DATE="10/10/2024" UPDATE_TIME="19:01:03" LABEL='Remove Comparison'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;REMOVE_COMPARISON&quot;,]"  LOCAL_ID="166218" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","REMOVE_COMPARISON",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[res := useryesno("This action will remove selected row(s). You want to continue?")
+clauseID := gridGetValueAt(objectgrid,row,7)
+if(res = 1){
+  //rejects := getObjects("MxFeedReject", 'CONTROL_CLAUSE="'+clauseID+'"')
+  req := "select f.FEEDREJECT_ID from FEEDREJECT f where f.CONTROL_CLAUSE = "+clauseID;
+  res := getData(req);
+
+  foreach feedRejectId in res {
+    temp := getObject("MxFeedReject", feedRejectId[0])
+    temp.CONTROL_CLAUSE := ""
+    saveObjectsImmediately(temp)
+  }
+
+  obj.findRecord("DATACONTROL_CLAUSES_ID",clauseID)
+  obj.remove("DATACONTROL_CLAUSES")
+}
+refreshScreen()
+saveObjectsImmediately(obj)]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[REMOVE_COMPARISON]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168780" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Remove Comparison]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171008" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;REMOVE_COMPARISON&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>ASSESSED_DATA</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[ASSESSED_DATA]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166217 v2 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='SET_CONTROL_CODE'" USER="lf.guimaraes" UPDATE_DATE="02/10/2024" UPDATE_TIME="17:24:42" LABEL='Set Control Code'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;SET_CONTROL_CODE&quot;,]"  LOCAL_ID="166217" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","SET_CONTROL_CODE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Set the control code]]></DESCRIPTION>
+<IMPACT ><![CDATA[obj.CODE := "CONTROL_"+date()+"_"+now()
+obj.APPLICABILITY := "BIZDICO"]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[SET_CONTROL_CODE]]></RULE_CODE>
+<RULE_GROUP >UPDATE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168778" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Set Control Code]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168779" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Set Control Code]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;10&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171007" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >10</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;SET_CONTROL_CODE&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166212 v6 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='DQC_COMMENT'" USER="lf.guimaraes" UPDATE_DATE="30/09/2024" UPDATE_TIME="17:29:33" LABEL='Update DQC Comment'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;DQC_COMMENT&quot;,]"  LOCAL_ID="166212" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","DQC_COMMENT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[control_id:= obj.CONTROL
+clause_id := obj.CONTROL_CLAUSE
+clause_data_ref := obj.CONTROL_CLAUSE_DATA
+assessed_value := obj.ASSESSED_VALUE
+target_value := obj.TARGET_VALUE
+
+if(assessed_value="") assessed_value :='""'
+if(target_value="") target_value :='""'
+
+arrayRes := array()
+
+control := getObject("MxDataControl", control_id)
+
+assessed_data := control.ASSESSED_DATA[DATACONTROL_CLAUSES_ID=clause_id]
+target_data := control.TARGET_DATA[DATACONTROL_CLAUSES_ID=clause_id]
+
+if ((clause_data_ref = assessed_data)) {
+  arrayRes := arrayappend(arrayRes, getNameOf("CONTROLCLAUSEDATA", assessed_data))
+  arrayRes := arrayappend(arrayRes, assessed_value)
+  arrayRes := arrayappend(arrayRes, getListItemLabel("DATACONTROL_CLAUSE_OPERATORS", control.CLAUSE_OPERATOR[DATACONTROL_CLAUSES_ID=clause_id]))
+  arrayRes := arrayappend(arrayRes, getNameOf("CONTROLCLAUSEDATA", target_data))
+  arrayRes := arrayappend(arrayRes, target_value)
+} else {
+  arrayRes := arrayappend(arrayRes, getNameOf("CONTROLCLAUSEDATA", target_data))
+  arrayRes := arrayappend(arrayRes, target_value)
+  if (assessed_value != target_value) {
+    arrayRes := arrayappend(arrayRes, getListItemCode("DATACONTROL_CLAUSE_OPERATORS", control.CLAUSE_OPERATOR[DATACONTROL_CLAUSES_ID=clause_id], 1))
+  } else {
+    arrayRes := arrayappend(arrayRes, getListItemLabel("DATACONTROL_CLAUSE_OPERATORS", control.CLAUSE_OPERATOR[DATACONTROL_CLAUSES_ID=clause_id]))
+  }
+  arrayRes := arrayappend(arrayRes, getNameOf("CONTROLCLAUSEDATA", assessed_data))
+  arrayRes := arrayappend(arrayRes, assessed_value)
+}
+comment := ""
+comment := strcat(comment,arrayget(arrayRes,0))
+comment := strcat(comment," (= "+arrayget(arrayRes,1)+")")
+comment := strcat(comment," "+arrayget(arrayRes,2)+" ")
+
+if(control.CLAUSE_OPERATOR[DATACONTROL_CLAUSES_ID=clause_id]!="NULL" and control.CLAUSE_OPERATOR[DATACONTROL_CLAUSES_ID=clause_id]!="NOTNULL"){
+  comment := strcat(comment, arrayget(arrayRes,3)+" ")
+  comment := strcat(comment," (= "+arrayget(arrayRes,4)+")")
+}
+
+obj.REJECT_DETAIL := comment
+obj.REJECT_DETAIL_LANG := comment
+
+saveObjects(obj)]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[DQC_COMMENT]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168769" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Update DQC Comment]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;13&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171002" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >13</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;DQC_COMMENT&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>FEEDREJECT</tablename>
+<classlabel>MxFeedReject</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>CONTROL</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[CONTROL]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxList 141447 v6 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTLIST FIND="LIST_CODE='DATACONTROL_CLAUSE_OPERATORS'" USER="lf.guimaraes" UPDATE_DATE="09/01/2025" UPDATE_TIME="14:33:14" LABEL='Data Control Clause Operator' PARTIAL='1'>
+<T_SMARTLIST CODEFIELDS="LIST_CODE" >
+</T_SMARTLIST>
+<T_SMARTLIST_CATEGORY>
+</T_SMARTLIST_CATEGORY>
+<T_SMARTLIST_ITEM CODEFIELDS="INTERNAL_CODE" >
+<R_SMARTLIST_ITEM CODE=",[&quot;INTERNAL_CODE&quot;,&quot;NOTNULL&quot;,]"  LOCAL_ID="717140" >
+<FREE2 ><![CDATA[1]]></FREE2>
+</R_SMARTLIST_ITEM>
+<R_SMARTLIST_ITEM CODE=",[&quot;INTERNAL_CODE&quot;,&quot;NULL&quot;,]"  LOCAL_ID="717141" >
+<FREE2 ><![CDATA[1]]></FREE2>
+</R_SMARTLIST_ITEM>
+</T_SMARTLIST_ITEM>
+<T_SMARTLIST_ITEM_LABEL CODEFIELDS="IL_ITEM_ID^IL_LANGUAGE" >
+</T_SMARTLIST_ITEM_LABEL>
+<T_SMARTLIST_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTLIST_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="146816" >
+<FREE1_LABEL ><![CDATA[Opposite Label]]></FREE1_LABEL>
+<FREE2_LABEL ><![CDATA[Standalone]]></FREE2_LABEL>
+</R_SMARTLIST_NAME>
+<R_SMARTLIST_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="146815" >
+<FREE1_LABEL ><![CDATA[Opposite Label]]></FREE1_LABEL>
+<FREE2_LABEL ><![CDATA[Standalone]]></FREE2_LABEL>
+</R_SMARTLIST_NAME>
+</T_SMARTLIST_NAME>
+
+</SMARTLIST>
+</RESULT>
+
+<!--MxRule 166241 v2 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='BLOCK_CLAUSE_CHANGE'" USER="lf.guimaraes" UPDATE_DATE="09/01/2025" UPDATE_TIME="15:23:19" LABEL='Block Clause Change'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;BLOCK_CLAUSE_CHANGE&quot;,]"  LOCAL_ID="166241" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","BLOCK_CLAUSE_CHANGE",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[if((isinteractive()=1) and (not(obj.isNewRecord("DATACONTROL_CLAUSES")))) {
+  abort("Assessed/Target data objects cannot be changed on this clause. Please edit current object.")
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[BLOCK_CLAUSE_CHANGE]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168809" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Block Clause Change]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;40&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;ASSESSED_DATA&quot;,]"  LOCAL_ID="171038" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[ASSESSED_DATA]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >40</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;40&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;TARGET_DATA&quot;,]"  LOCAL_ID="171039" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[TARGET_DATA]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >40</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;BLOCK_CLAUSE_CHANGE&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166240 v13 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SMARTRULE FIND="RULE_CODE='VAL_OPERATOR'" USER="lf.guimaraes" UPDATE_DATE="09/01/2025" UPDATE_TIME="14:38:29" LABEL='Validate Operator'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;VAL_OPERATOR&quot;,]"  LOCAL_ID="166240" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","VAL_OPERATOR",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[if((isinteractive()=1) and (not(obj.isNewRecord("DATACONTROL_CLAUSES")))) {
+  standAloneFlagBefore := getListItemCode("DATACONTROL_CLAUSE_OPERATORS", obj.CLAUSE_OPERATOR, 2)
+  standAloneFlagAfter := getListItemCode("DATACONTROL_CLAUSE_OPERATORS", newvalue, 2)
+  
+  if(standAloneFlagBefore != standAloneFlagAfter) abort("Only a same type (standalone or not) operator can be selected in an existing clause.")
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >DQC</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[VAL_OPERATOR]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168808" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Validate Operator]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;40&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;CLAUSE_OPERATOR&quot;,]"  LOCAL_ID="171037" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[CLAUSE_OPERATOR]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >40</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;VAL_OPERATOR&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>DATACONTROL</tablename>
+<classlabel>MxDataControl</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+</BODY>
