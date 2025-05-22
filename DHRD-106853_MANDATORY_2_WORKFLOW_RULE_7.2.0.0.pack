@@ -1,0 +1,1003 @@
+<?xml version='1.0' encoding="UTF-8" ?>
+<HEAD>
+<PACKAGE>DHRD-106853_MANDATORY_WORKFLOW_RULE</PACKAGE>
+<NAME>DHRD-106853_MANDATORY_WORKFLOW_RULE</NAME>
+<BUILD_DATE>20250423</BUILD_DATE>
+<LEVEL>MANDATORY</LEVEL>
+<ORIGIN></ORIGIN>
+<RELEASE>7.2.0.0-SNAPSHOT</RELEASE>
+<CREATOR>NeoXam</CREATOR>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+</HEAD>
+
+<BODY>
+
+<!--MxRule 166246 v4 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_MANUAL_VALIDATION'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:34:36" LABEL='Manual Validation'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_MANUAL_VALIDATION&quot;,]"  LOCAL_ID="166246" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_MANUAL_VALIDATION",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Enters a "VALIDATION" input for a applicable step (status = RUNNING and waiting input = "VALIDATION")]]></DESCRIPTION>
+<IMPACT ><![CDATA[// Initialize arrays to store step labels and IDs
+stepsLabel := array()
+stepsId := array()
+
+// Loop through each workflow step
+foreach obj.WORKFLOW_STEP do {
+  // Check if the step is in "RUNNING" status and requires "VALIDATION"
+  if (obj.STEP_INPUT = "VALIDATION" and obj.STEP_STATUS = "RUNNING") {
+    // Add the step label and ID to the arrays
+    stepsLabel := arrayappend(stepsLabel, obj.STEP_LABEL)
+    stepsId := arrayappend(stepsId, obj.WORKFLOW_STEP_ID)
+  }
+}
+
+// If no steps are ready for validation, notify the user and stop
+if (arraysize(stepsLabel) = 0) {
+  userinfo("No steps ready for manual validation.")
+  return 0
+}
+
+// Prompt the user to choose a step to validate
+res := userdialog("Choose step to validate:", "ARRAY, Step: ", stepsLabel)
+
+// If no step is chosen, stop the process
+if (res = "") {
+  return 0
+} else {
+  // Get the ID of the selected step from the arrays
+  stepId := arrayget(stepsId, arrayfind(stepsLabel, res[0]))
+
+  // Send the VALIDATION input for the selected step
+  obj.WF_SEND_INPUT(stepId, "VALIDATION")
+}  ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_MANUAL_VALIDATION]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168816" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Manual Validation]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168817" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Validation manuelle]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171044" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_MANUAL_VALIDATION&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>WORKFLOW</tablename>
+<classlabel>MxWorkflow</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166247 v5 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_SEND_INPUT'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:35:58" LABEL='Send Input'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_SEND_INPUT&quot;,]"  LOCAL_ID="166247" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_SEND_INPUT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Send a input for a step.]]></DESCRIPTION>
+<IMPACT ><![CDATA[stepId := arg1
+input := arg2
+
+// Set the received input for the specified step
+obj.STEP_RECEIVED_INPUT[WORKFLOW_STEP_ID = stepId] := input
+
+// If the object has been modified, proceed with checking and saves it
+if (obj.isObjectModified() = 1) {
+
+  // Continuously check for any new events triggered by the checking
+  while (obj.WF_CHECK_RUN()=1) {
+  }
+
+  // Save the object immediately after processing
+  saveObjectsImmediately(obj)
+}    ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_SEND_INPUT]]></RULE_CODE>
+<RULE_GROUP >COMPUTE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168818" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Send Input]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168819" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Envoyer Input]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;WF_SEND_INPUT&quot;,]"  LOCAL_ID="171045" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[WF_SEND_INPUT]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_SEND_INPUT&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>WORKFLOW</tablename>
+<classlabel>MxWorkflow</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166248 v4 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_LOG_EVENT'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:35:37" LABEL='Log Event'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_LOG_EVENT&quot;,]"  LOCAL_ID="166248" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_LOG_EVENT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Checks if the event has been alreadyrecorded. If not, add it to the log.]]></DESCRIPTION>
+<IMPACT ><![CDATA[// Check if the event already exists in the workflow event log
+existing := getObjects("MxWorkflowEventLog", "LOG_EVENT = '" + arg1 + "'")
+
+if (arraysize(existing) = 0) {
+  // If no existing log is found, create a new log entry
+  log := createObject("MxWorkflowEventLog")
+  log.LOG_EVENT := arg1  // Set the event identifier
+  log.STEP := arg2       // Associate the event with the specific workflow step
+
+  // Save the new log entry immediately to the database
+  saveObjectsImmediately(log)
+  
+  return 1  // Indicate that a new event was logged
+} 
+
+// If the event already exists, no new log is created
+return 0  // Indicate no new event was logged]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS >N</REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_LOG_EVENT]]></RULE_CODE>
+<RULE_GROUP >COMPUTE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168820" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Log Event]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168821" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Enregistrer l'événement]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;WF_LOG_EVENT&quot;,]"  LOCAL_ID="171046" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[WF_LOG_EVENT]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_LOG_EVENT&quot;,]^CONDITION" VERSION=0>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166249 v3 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_SYNC_JOBREPORT_WITH_STEP'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:35:02" LABEL='Synchronize Jobreport With Step'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_SYNC_JOBREPORT_WITH_STEP&quot;,]"  LOCAL_ID="166249" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_SYNC_JOBREPORT_WITH_STEP",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[This rule is executed whenever a Master jobReport is finished. This event is captured and the related step is updated due to the link between the step and the task linked to the master job report.]]></DESCRIPTION>
+<IMPACT ><![CDATA[jobReportId := obj.id()
+
+// Check if the job report is a master job report
+if (jobReportId = obj.MASTER_JOBREPORT) {
+
+    //Retrieving the pending business processes linked to the task
+    workflowsToSync := getObjects("MxWorkflow", "SCOPE_TASK=" + obj.TASK + " AND IS_TEMPLATE='N'")
+
+    // If there are workflows to sync
+    if (arraysize(workflowsToSync) > 0) {
+
+        // Iterate through each workflow linked to the task
+        foreach workflowToSync in workflowsToSync do {
+            
+            // Check each workflow step scope within the workflow
+            foreach workflowToSync.WORKFLOW_STEP_SCOPE do {
+                
+                // If the workflow step scope matches the task
+                if (workflowToSync.SCOPE_TASK = obj.TASK) {
+
+                    // Update the job report ID if the conditions are met
+                    if ((workflowToSync.SCOPE_AT_APPLICATION_DATE = "Y" and workflowToSync.APPLICATION_DATE = obj.TASK_START_DATE) or (workflowToSync.SCOPE_AT_APPLICATION_DATE != "Y")) {
+
+                        workflowToSync.SCOPE_JOBREPORT := jobReportId
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Return the list of workflows to be synchronized
+return workflowsToSync]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_SYNC_JOBREPORT_WITH_STEP]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168822" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Synchronize Jobreport With Step]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168823" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Synchroniser Job Report avec l’étape]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;WF_SYNC_JOBREPORT_WITH_STEP&quot;,]"  LOCAL_ID="171047" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[WF_SYNC_JOBREPORT_WITH_STEP]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_SYNC_JOBREPORT_WITH_STEP&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>JOBREPORT</tablename>
+<classlabel>MxJobReport</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>MASTER_JOBREPORT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[MASTER_JOBREPORT]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 88690 v3 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='ADD_DELAY_TODATE'" USER="NeoXam" UPDATE_DATE="07/04/2025" UPDATE_TIME="18:40:26" LABEL='Add delay to date' PARTIAL='1'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;ADD_DELAY_TODATE&quot;,]"  LOCAL_ID="88690" >
+<IMPACT ><![CDATA[startdate:=arg1;
+delay:=arg2;
+if (startswith(delay, "D"))
+{
+  day := strsub(delay, 1);
+}else if (endswith(delay, "Y"))
+{
+  year := strsub(delay, 0, strlen(delay) - 1);
+}else if (endswith(delay, "M"))
+{
+  month := strsub(delay, 0, strlen(delay) - 1);
+}else{
+  neg := strsearch(delay,"-")
+  
+  if(neg > 0){
+    mult := -1
+    delay := strsplit(delay,"-",1)  
+  }else{
+    mult := 1
+    delay := strsplit(delay,"+",1)  
+  }
+  
+  
+  day:=convert(delay,0)*mult
+
+
+}
+startdate:=dateadd(startdate, year, month, day);
+
+return startdate;]]></IMPACT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166250 v4 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_CREATE_RUN'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:35:28" LABEL='Create Run'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_CREATE_RUN&quot;,]"  LOCAL_ID="166250" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_CREATE_RUN",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Creates a new instance/run of a workflow, ensuring that each step and event is correctly linked to the workflow run.]]></DESCRIPTION>
+<IMPACT ><![CDATA[// Create a run as a copy of the template workflow and set its properties
+run := obj.makecopy()
+run.IS_TEMPLATE := "N"
+run.CODE := run.CODE + "_" + now()
+run.APPLICATION_DATE := today()
+run.WORKFLOW_START_DATE := today()
+
+// Save the run and get the updated object. Necessary to create all the persisted IDs
+run := saveObjectsImmediately(run)
+run := run[0]
+
+// Update the step-out events with the run IDs
+foreach run.WORKFLOW_STEP do {
+  // If the step-out event does not contain the step ID, update it
+  if (strsearch(run.STEP_EVENT_OUT, run.WORKFLOW_STEP_ID) = -1) {
+    stepCode := run.STEP_CODE
+    templateEvent := obj.STEP_EVENT_OUT[STEP_CODE = stepCode]
+    
+    // Concatenate the event and step ID to form the new step-out event
+    run.STEP_EVENT_OUT := strcat(templateEvent, "_", run.WORKFLOW_STEP_ID)
+  }
+}
+
+// Update the step-waiting events with the run IDs
+foreach run.WORKFLOW_STEP_WAIT do {
+  waitingEvent := run.WAITING_FOR_EVENT
+  templateStepCode := obj.STEP_CODE[STEP_EVENT_OUT = waitingEvent]
+  
+  // Update the waiting event to reflect the run ID
+  run.WAITING_FOR_EVENT := run.STEP_EVENT_OUT[STEP_CODE = templateStepCode]
+}
+
+// If the run object has been modified, save it
+if (run.isObjectModified() = 1) {
+  run := saveObjectsImmediately(run)
+  run := run[0]
+
+  // Check and run the workflow
+  while (run.WF_CHECK_RUN() = 1) {
+  }
+
+  // If the object has been modified again, save it
+  if (run.isObjectModified() = 1) saveObjectsImmediately(run)
+}    ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_CREATE_RUN]]></RULE_CODE>
+<RULE_GROUP >COMPUTE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168824" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Create Run]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168825" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Créer Run]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171048" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_CREATE_RUN&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>WORKFLOW</tablename>
+<classlabel>MxWorkflow</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>IS_TEMPLATE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[IS_TEMPLATE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[Y]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166251 v4 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_UPDATE_STEP_STATUS'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:36:06" LABEL='Update Step Status'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_UPDATE_STEP_STATUS&quot;,]"  LOCAL_ID="166251" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_UPDATE_STEP_STATUS",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Updates a workflow step's status. If is a terminal status, logs an output event.]]></DESCRIPTION>
+<IMPACT ><![CDATA[stepId := arg1
+status := arg2
+
+// Update the step status for the specified workflow step
+obj.STEP_STATUS[WORKFLOW_STEP_ID = stepId] := status
+if(obj.STEP_START_DATE[WORKFLOW_STEP_ID = stepId] = ""){
+   obj.STEP_START_DATE[WORKFLOW_STEP_ID = stepId] := today()
+   delay := obj.STEP_SLA[WORKFLOW_STEP_ID = stepId]
+   delay := getListItemCode("DELAY", delay, 0);
+   expectedEndDate := ADD_DELAY_TODATE(today(), delay);
+   obj.STEP_EXPECTED_END_DATE[WORKFLOW_STEP_ID = stepId] := expectedEndDate
+  
+  
+}// Retrieve the ID for the given status from the status list
+statusId := getListItemId("WF_STATUS", status)
+
+// Check if the status code is terminal
+if (getListItemCode("WF_STATUS", statusId, 1) = 1) {
+  
+  // Get the associated event to be generated for the workflow step
+  eventOut := obj.STEP_EVENT_OUT[WORKFLOW_STEP_ID = stepId]
+  obj.STEP_END_DATE[WORKFLOW_STEP_ID = stepId] := today()
+  
+  // Log the event
+  WF_LOG_EVENT(eventOut, stepId)
+}]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_UPDATE_STEP_STATUS]]></RULE_CODE>
+<RULE_GROUP >COMPUTE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168826" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Update Step Status]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168827" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Mettre à jour le statut de l'étape]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;WF_UPDATE_STEP_STATUS&quot;,]"  LOCAL_ID="171049" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[WF_UPDATE_STEP_STATUS]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_UPDATE_STEP_STATUS&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>WORKFLOW</tablename>
+<classlabel>MxWorkflow</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>IS_TEMPLATE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[IS_TEMPLATE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[N]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166252 v6 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_CHECK_RUN'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:43:22" LABEL='Check Run'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_CHECK_RUN&quot;,]"  LOCAL_ID="166252" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_CHECK_RUN",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Main business rule that recalculates steps statuses for a workflow.]]></DESCRIPTION>
+<IMPACT ><![CDATA[notifiyEvent := 0  // Flag to track if any notification event is raised
+
+foreach obj.WORKFLOW_STEP do {
+  
+  // Extract necessary step information
+  stepId := obj.WORKFLOW_STEP_ID  // Unique identifier for the step
+  stepInput := obj.STEP_INPUT  // Input required by the step
+  stepReceivedInput := obj.STEP_RECEIVED_INPUT  // Input actually received by the step
+  index := obj.STEP_SEQUENCE_NUMBER  // Step's position in the workflow sequence
+
+  // Determine if the prerequisite step(s) are finished
+  preFinished := (index = 1) ? 1 : 0  // First step is always pre-finished
+  if (index > 1) {
+    prevIndex := index - 1  // Previous step index
+    preStatus := obj.STEP_STATUS[STEP_SEQUENCE_NUMBER = prevIndex]  // Status of the previous step
+    preBlocking := (obj.STEP_IS_BLOCKING[STEP_SEQUENCE_NUMBER = prevIndex] = 'Y') ? 1 : 0  // Check if the previous step is blocking
+
+    // Pre-finished if the previous step is non-blocking or has a successful status
+    if (preBlocking != 1 or getListItemCode("WF_STATUS", preStatus, 1) = 1) {
+      preFinished := 1
+    }
+  }
+
+  // Check if the required input has been received
+  inputReceived := (stepInput = stepReceivedInput) ? 1 : 0
+
+  // Check if all required events for this step are completed
+  query := "select w.WAITING_FOR_EVENT from WORKFLOW_STEP_WAIT w where w.WAITING_STEP =" + stepId
+  res := getSqlData(query)  // Query the database for events the step is waiting for
+
+  waitFinished := 1  // Assume all events are finished initially
+  foreach event in res do {
+    eventCode := event[0]  // Extract event code
+    eventLog := getObjects("MxWorkflowEventLog", "LOG_EVENT='" + eventCode + "'")  // Check if the event is logged
+    if (arraysize(eventLog) = 0) {  // If no log exists for the event
+      waitFinished := 0  // Mark waiting as not finished
+      break  // Exit the loop early as one missing event is enough
+    }
+  }
+
+  // If the step's prerequisites and waiting conditions are satisfied
+  if (waitFinished = 1 and preFinished = 1) {
+    checkCondition := obj.WF_CHECK_STEP_CONDITION(stepId)  // Validate specific conditions for the step
+    
+    // Determine step status based on conditions and input
+    stepStatus := "RUNNING"  // Default to "RUNNING"
+    
+    if (checkCondition = 1 and inputReceived = 1) {
+      stepStatus := "SUCCESS"
+    }
+
+    // Update step status and returns if an event is loged
+    newEvent := obj.WF_UPDATE_STEP_STATUS(stepId, stepStatus)
+    
+    //Set the notification event to 1 if at least one event is logged
+    if (notifiyEvent = 0 and newEvent = 1) notifiyEvent := 1
+  }
+}
+
+// Return the notification event status
+return notifiyEvent                                    ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_CHECK_RUN]]></RULE_CODE>
+<RULE_GROUP >COMPUTE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ><![CDATA[The function evaluates each step in a workflow by applying four key checks to determine its status. These checks ensure that all prerequisites and conditions are met before progressing.
+
+Checks Applied:
+-Predecessor Validation: Ensures that all preceding steps are in a terminal status.
+-Wait Completion: Verifies that all required external events have been received.
+-Input Validation: Confirms that any expected input has been provided and matches the required specification.
+-Step Conditions: Validates that custom conditions specific to the step are satisfied.
+
+Final Step Statuses:
+-Running: The step is set to "Running" if all predecessors are complete and all awaited events have been received.
+-Success: The step progresses to "Success" if, in addition to meeting the criteria for "Running," the input validation and step conditions are fulfilled.
+-Waiting: If any of the above conditions are not satisfied, the step remains in "Waiting" status.
+
+Event Notification:
+-If the step's status change results in logging a new event, the algorithm returns 1 to indicate that an event notification was triggered.
+-If no new event is logged, the algorithm returns 0.]]></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168828" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Check Run]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168829" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Vérifier Run]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;WF_CHECK_RUN&quot;,]"  LOCAL_ID="171050" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[WF_CHECK_RUN]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_CHECK_RUN&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>WORKFLOW</tablename>
+<classlabel>MxWorkflow</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>IS_TEMPLATE</fieldname>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[IS_TEMPLATE]]></fieldlabel>
+<RF CLASS="value">
+<lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue><![CDATA[N]]></lib.system.packaging.MxObjectFormatter$StringPackFormatter$FieldValue>
+</RF>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166253 v4 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_NOTIFY_EVENT'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:35:45" LABEL='Notify Event'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_NOTIFY_EVENT&quot;,]"  LOCAL_ID="166253" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_NOTIFY_EVENT",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[When a new event is logged, recaculates all workflows depending on it]]></DESCRIPTION>
+<IMPACT ><![CDATA[workflows := obj.getObjects("MxWorkflow", "WAITING_FOR_EVENT = " + obj.EVENT)
+
+foreach workflow in workflows do {
+  
+  // Continuously check the workflow while new events are triggered
+  while (workflow.WF_CHECK_RUN() = 1) {
+    // Loop continues until no new event is generated
+  }
+
+}  ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS >N</REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_NOTIFY_EVENT]]></RULE_CODE>
+<RULE_GROUP >COMPUTE</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168830" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Notify Event]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168831" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Notifier l'événement]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;13&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171051" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >13</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_NOTIFY_EVENT&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>WORKFLOW_EVENT_LOG</tablename>
+<classlabel>MxWorkflowEventLog</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166254 v3 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_CHECK_STEP_CONDITION'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:34:20" LABEL='Check Step Condition'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_CHECK_STEP_CONDITION&quot;,]"  LOCAL_ID="166254" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_CHECK_STEP_CONDITION",]^CONDITION]]></CONDITION>
+<DESCRIPTION ><![CDATA[Check if the step conditions are met. Return 1 if yes.]]></DESCRIPTION>
+<IMPACT ><![CDATA[step := arg1
+
+// Return 0 if no step is provided
+if (step = "") return 0
+
+
+// Retrieve the job report and task associated with the given step
+jobReport := obj.SCOPE_JOBREPORT[SCOPE_STEP = step]
+task := obj.SCOPE_TASK[SCOPE_STEP = step]
+
+// If no task is found, return 1
+if (task = "") return 1
+
+
+todayDate := date()
+
+// If no job report is linked to the step, fetch a new one for the task with today's date
+if (jobReport = "") {
+
+  jobReports := getObjects("MxJobReport", "TASK=" + task + " AND TASK_START_DATE='" + todayDate + "' AND JOB=''")
+  jobReport := jobReports[0]
+
+  // If no job report is found, return 0
+  if (jobReport = "") return 0
+  
+
+  // Link the retrieved job report to the step
+  obj.SCOPE_JOBREPORT[SCOPE_STEP = step] := jobReport.id()
+
+} else {
+
+  // If a job report is already linked, retrieve it
+  jobReport := getObject("MxJobReport", jobReport)
+}
+
+// Return 1 if the job report status is "SUCCESS_TASK", otherwise return 0
+if (jobReport.STATUS = "SUCCESS_TASK") return 1
+else return 0]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_CHECK_STEP_CONDITION]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >AUTO</RULE_TYPE>
+<USER_COMMENT ><![CDATA[Currently, it checks if a task and job report are linked to a given workflow step. If not, it attempts to find and link a new job report based on the task and today's date. 
+To be enriched.]]></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168832" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Check Step Condition]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168833" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Vérifier la condition de l’étape]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;60&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;WF_CHECK_STEP_CONDITION&quot;,]"  LOCAL_ID="171052" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ><![CDATA[WF_CHECK_STEP_CONDITION]]></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >60</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_CHECK_STEP_CONDITION&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>WORKFLOW</tablename>
+<classlabel>MxWorkflow</classlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+<!--MxRule 166255 v6 [Current version] -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="UTF8" >
+<SMARTRULE FIND="RULE_CODE='WF_JOB_REPORT_SAVED'" USER="NeoXam" UPDATE_DATE="23/04/2025" UPDATE_TIME="11:35:03" LABEL='Job Report Saved'>
+<T_SMARTRULE CODEFIELDS="RULE_CODE" >
+<R_SMARTRULE CODE=",[&quot;RULE_CODE&quot;,&quot;WF_JOB_REPORT_SAVED&quot;,]"  LOCAL_ID="166255" >
+<ACTIVE >Y</ACTIVE>
+<CONDITION ><![CDATA[$,["RULE_CODE","WF_JOB_REPORT_SAVED",]^CONDITION]]></CONDITION>
+<DESCRIPTION ></DESCRIPTION>
+<IMPACT ><![CDATA[// Synchronize job report with steps and get updated workflows
+updatedWorkflows := obj.WF_SYNC_JOBREPORT_WITH_STEP()
+
+// If there are updated workflows, proceed
+if (arraysize(updatedWorkflows) > 0) {
+
+  // Check and run each workflow
+  foreach workflow in updatedWorkflows do {
+    workflowUpdated := getObject("MxWorkflow", workflow.id())
+
+    // Continuously check and run the workflow until no further action is required
+    while (workflowUpdated.WF_CHECK_RUN() = 1) {
+    }
+
+    // Save the workflow after checking and running
+    saveObjectsImmediately(workflowUpdated)
+  }
+}                    ]]></IMPACT>
+<PRIVACY_LEVEL >SMARTCO</PRIVACY_LEVEL>
+<REEXECUTED_IN_BETWEEN_VERSIONS ></REEXECUTED_IN_BETWEEN_VERSIONS>
+<RULE_CATEGORY >WORKFLOW</RULE_CATEGORY>
+<RULE_CODE ><![CDATA[WF_JOB_REPORT_SAVED]]></RULE_CODE>
+<RULE_GROUP >ADM</RULE_GROUP>
+<RULE_STATUS >STANDARD</RULE_STATUS>
+<RULE_STATUS_AVAILABILITY >COMP</RULE_STATUS_AVAILABILITY>
+<RULE_TYPE >MONO</RULE_TYPE>
+<USER_COMMENT ></USER_COMMENT>
+</R_SMARTRULE>
+</T_SMARTRULE>
+<T_SMARTRULE_NAME CODEFIELDS="NAME_LANGUAGE" >
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;0&quot;,]"  LOCAL_ID="168834" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Job Report Saved]]></NAME>
+<NAME_LANGUAGE >0</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+<R_SMARTRULE_NAME CODE=",[&quot;NAME_LANGUAGE&quot;,&quot;1&quot;,]"  LOCAL_ID="168835" >
+<CONTEXT_ACCESS_NAME ></CONTEXT_ACCESS_NAME>
+<MENU_ACCESS_NAME ></MENU_ACCESS_NAME>
+<NAME ><![CDATA[Job Report enregistré]]></NAME>
+<NAME_LANGUAGE >1</NAME_LANGUAGE>
+</R_SMARTRULE_NAME>
+</T_SMARTRULE_NAME>
+<T_SMARTRULE_TRIGGER CODEFIELDS="TRIGGER_TYPE^TRIGGER_OBJECT" >
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;13&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171054" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >13</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+<R_SMARTRULE_TRIGGER CODE=",[&quot;TRIGGER_TYPE&quot;,&quot;50&quot;,][&quot;TRIGGER_OBJECT&quot;,&quot;null&quot;,]"  LOCAL_ID="171053" >
+<ICON ></ICON>
+<PROCESS_LOCATION ></PROCESS_LOCATION>
+<SHORTCUT ></SHORTCUT>
+<TRIGGER_OBJECT ></TRIGGER_OBJECT>
+<TRIGGER_PRIORITY ></TRIGGER_PRIORITY>
+<TRIGGER_TYPE >50</TRIGGER_TYPE>
+</R_SMARTRULE_TRIGGER>
+</T_SMARTRULE_TRIGGER>
+<T_SMARTRULE_WFLINK>
+</T_SMARTRULE_WFLINK>
+
+<RF CLASS="Condition" CODE="$,[&quot;RULE_CODE&quot;,&quot;WF_JOB_REPORT_SAVED&quot;,]^CONDITION" VERSION=0>
+<RF CLASS="classlist">
+<RF CLASS="lib.system.objects.Condition$ClassDesc">
+<tablename>JOBREPORT</tablename>
+<classlabel>MxJobReport</classlabel>
+</RF>
+</RF>
+<RF CLASS="criteria">
+<RF CLASS="lib.system.objects.Condition$Criterion">
+<OPENPARANTH>1</OPENPARANTH>
+<fieldname>MASTER_JOBREPORT</fieldname>
+<COMPOPER>3</COMPOPER>
+<CLOSEPARANTH>1</CLOSEPARANTH>
+<USEROPTION>1</USEROPTION>
+<fieldlabel><![CDATA[MASTER_JOBREPORT]]></fieldlabel>
+</RF>
+</RF>
+</RF>
+</SMARTRULE>
+</RESULT>
+
+</BODY>
