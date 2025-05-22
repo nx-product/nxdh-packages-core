@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding="windows-1252" ?>
+<HEAD>
+<PACKAGE>NXDH-28282_MANDATORY_NEW_VALUATION_BULKSIZE</PACKAGE>
+<NAME>NXDH-28282_MANDATORY_NEW_VALUATION_BULKSIZE</NAME>
+<BUILD_DATE>20250128</BUILD_DATE>
+<LEVEL>OPTIONAL</LEVEL>
+<ORIGIN></ORIGIN>
+<RELEASE></RELEASE>
+<CREATOR>pierre.casemajor</CREATOR>
+<DESCRIPTION><![CDATA[]]></DESCRIPTION>
+</HEAD>
+
+<BODY>
+<!--   Package created by Pierre Casemajor -->
+<!--      creation date: 28/01/2025 17:09:27 -->
+<!--      creation version: null -->
+<!--      source environment: //localhost:8100/SmartServer -->
+
+<!--MxService 999 v31 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<SERVICE FIND="SERVICE_CODE='valuationservice'" USER="pierre.casemajor" UPDATE_DATE="28/01/2025" UPDATE_TIME="17:05:15" LABEL='ValuationService' PARTIAL='1'>
+<T_SERVICE CODEFIELDS="SERVICE_CODE" >
+<R_SERVICE CODE=",[&quot;SERVICE_CODE&quot;,&quot;valuationservice&quot;,]"  LOCAL_ID="999" >
+<DESCRIPTION ><![CDATA[ValuationService allows to generate portfolio valuations and exposure look-through.
+Based on configurable valuations styles, the module evaluates portfolio holdings on various asset classes and provides market values for multiple currencies, analytics aggregation, exposure calculation, fund and derivative look-through, etc.
+
+Parameter : opt.finance.valuation_service.bulkSize : used to specify the number of valuations to record at once.
+
+Arguments:
+Name; Description; Mandatory; Comment
+
+SOURCE; Source of data to value; Y; Use VALUATION for using MxValuation data as source, HOLDING for using MxHolding as source
+
+PORTFOLIO_COND; Portfolio condition; Y; List of portfolio Ids or other condition based on portfolio attributes
+
+SOURCE_COND; Additionnal condition; N; Specify additional condition based on attributes of the source class
+
+VALUATION_STYLE; Valuation style; Y; ID of valuation style to use
+
+VALUATION_DATE; Valuation date; N; By default it is today, format is yyyymmdd
+
+LOOKTHROUGH_STYLE; Lookthrough style; N ; ID of look-through style to use
+
+LOOKTHROUGH_DEPTH; Lookthrough depth; N ; Allows to limit to the depth (levels) when doing look-through
+
+VALUATION_CURRENCY; Currency of the valuation; N; ID of currency
+
+VALUATION_STORAGE; Storage option; N; Specify Y to store the results, N to get resulting objects
+
+NBTHREAD; Number of threads; N; Should be used for MultiValuationService only (If NBTHREAD is not defined, by default only 1 worker is created. If NBTHREAD=1, then same behavior than NBTHREAD not defined)
+
+Example:
+
+"PORTFOLIO_COND=13206" , "SOURCE_COND=[SECURITY=214916]", "VALUATION_STYLE=10", "SOURCE=HOLDING", "VALUATION_STORAGE=Y", "VALUATION_DATE=20211226" , "VALUATION_CURRENCY=36636"
+
+"PORTFOLIO_COND=[PORTFOLIO_TYPE=608839]", "SOURCE=VALUATION", "SOURCE_COND=[VALUATION_DATE='20210701']", "VALUATION_STORAGE=Y"]]></DESCRIPTION>
+</R_SERVICE>
+</T_SERVICE>
+<T_SERVICE_ACTIVATION CODEFIELDS="PROCESS" >
+</T_SERVICE_ACTIVATION>
+<T_SERVICE_PROPERTIES CODEFIELDS="PROPERTIES_VALUE" >
+</T_SERVICE_PROPERTIES>
+
+</SERVICE>
+</RESULT>
+
+<!--MxParam 86887 v2 -->
+<RESULT MODE="XML" ACTION="GETOBJECTS"  VERSION="2"  CHARSET="Cp1252" >
+<PARAM FIND="PARAM_COD='opt.finance.valuation_service.bulkSize'" USER="pierre.casemajor" UPDATE_DATE="28/01/2025" UPDATE_TIME="17:06:24" LABEL='opt.finance.valuation_service.bulkSize'>
+<T_PARAM CODEFIELDS="PARAM_COD" >
+<R_PARAM CODE=",[&quot;PARAM_COD&quot;,&quot;opt.finance.valuation_service.bulkSize&quot;,]"  LOCAL_ID="86887" >
+<PARAM_ACTIVE >Y</PARAM_ACTIVE>
+<PARAM_CATEGORY >FINANCE</PARAM_CATEGORY>
+<PARAM_COD ><![CDATA[opt.finance.valuation_service.bulkSize]]></PARAM_COD>
+<PARAM_DESCRIPTION ><![CDATA[Used to specify the bulksize when using ValuationService]]></PARAM_DESCRIPTION>
+<PARAM_IS_RESTART_MANDATORY >N</PARAM_IS_RESTART_MANDATORY>
+<PARAM_PRIVACY >DATAADMIN</PARAM_PRIVACY>
+<PARAM_VALUE ><![CDATA[2000]]></PARAM_VALUE>
+<PARAM_VALUE_LIST ></PARAM_VALUE_LIST>
+<PARAM_VALUE_MAX ></PARAM_VALUE_MAX>
+<PARAM_VALUE_MIN ></PARAM_VALUE_MIN>
+<PARAM_VALUE_TYPE >INTEGER</PARAM_VALUE_TYPE>
+</R_PARAM>
+</T_PARAM>
+<T_PARAM_ENUM>
+</T_PARAM_ENUM>
+<T_PARAM_USER>
+</T_PARAM_USER>
+
+</PARAM>
+</RESULT>
+
+</BODY>
